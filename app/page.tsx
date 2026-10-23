@@ -1,47 +1,73 @@
-export default function Page() {
+import { Contact } from '@/components/site/contact'
+import { Demo } from '@/components/site/demo'
+import { Faq } from '@/components/site/faq'
+import { SiteFooter } from '@/components/site/footer'
+import { Grades } from '@/components/site/grades'
+import { SiteHeader } from '@/components/site/header'
+import { Hero } from '@/components/site/hero'
+import { HowItWorks } from '@/components/site/how-it-works'
+import { Implementation } from '@/components/site/implementation'
+import { Need } from '@/components/site/need'
+import { Roles } from '@/components/site/roles'
+import { Security } from '@/components/site/security'
+import { Stories } from '@/components/site/stories'
+import { Timeline } from '@/components/site/timeline'
+import { CONTACT_EMAIL, SITE_URL } from '@/lib/site-data'
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Codevelop Solutions',
+    legalName: 'CODEVELOP SOLUTIONS LTDA',
+    taxID: '51.412.510/0001-07',
+    url: SITE_URL,
+    email: CONTACT_EMAIL,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Alameda Salvador, 1057, Edifício Torre América, sala 1802, Caminho das Árvores',
+      addressLocality: 'Salvador',
+      addressRegion: 'BA',
+      postalCode: '41820-790',
+      addressCountry: 'BR',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'SpeakFlow Escolas',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    inLanguage: 'pt-BR',
+    description:
+      'Aprendizagem com inteligência artificial para toda a rede municipal, em qualquer componente curricular.',
+    publisher: { '@type': 'Organization', name: 'Codevelop Solutions' },
+  },
+]
+
+export default function Home() {
   return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
+      <SiteHeader />
+      <main id="conteudo">
+        <Hero />
+        <Need />
+        <Timeline />
+        <Stories />
+        <HowItWorks />
+        <Demo />
+        <Roles />
+        <Grades />
+        <Security />
+        <Implementation />
+        <Faq />
+        <Contact />
+      </main>
+      <SiteFooter />
+    </>
   )
 }

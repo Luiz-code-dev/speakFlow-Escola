@@ -18,7 +18,6 @@ O site apresenta a plataforma a prefeitos, secretários de educação, coordenad
 - [Demonstração interativa](#demonstração-interativa)
 - [Acessibilidade e desempenho](#acessibilidade-e-desempenho)
 - [SEO](#seo)
-- [Domínio e deploy](#domínio-e-deploy)
 - [Regras de conteúdo](#regras-de-conteúdo)
 
 ## Stack
@@ -110,17 +109,6 @@ A seção `#demonstracao` simula o retorno da IA para Inglês (fala), Português
 ## SEO
 
 Metadados e Open Graph em `app/layout.tsx`, imagem OG gerada em `app/opengraph-image.tsx`, `sitemap.xml`, `robots.txt` e dados estruturados `Organization` e `SoftwareApplication`. O idioma é `pt-BR`. A URL canônica fica em `SITE_URL` (`lib/site-data.ts`).
-
-## Domínio e deploy
-
-Deploy na Vercel (branch `main` → produção).
-
-Para usar **speakflowescola.com.br**:
-
-1. Registre o domínio no [Registro.br](https://registro.br). Domínios `.com.br` exigem CPF ou CNPJ; use o CNPJ da Codevelop.
-2. Na Vercel: *Project → Settings → Domains → Add* `speakflowescola.com.br` e `www.speakflowescola.com.br`.
-3. No Registro.br, aponte os DNS para a Vercel (registro `A` para `76.76.21.21` e `CNAME` de `www` para `cname.vercel-dns.com`), ou troque os servidores DNS para `ns1.vercel-dns.com` e `ns2.vercel-dns.com`.
-4. Opcional: verifique o domínio também no Resend para enviar como `contato@speakflowescola.com.br`.
 
 ## Regras de conteúdo
 

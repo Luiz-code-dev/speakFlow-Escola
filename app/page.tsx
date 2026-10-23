@@ -40,7 +40,7 @@ const jsonLd = [
     operatingSystem: 'Web',
     inLanguage: 'pt-BR',
     description:
-      'Aprendizagem com inteligência artificial para toda a rede municipal, em qualquer componente curricular.',
+      'Aprendizagem com inteligência artificial para redes de ensino públicas e privadas, em qualquer componente curricular.',
     publisher: { '@type': 'Organization', name: 'Codevelop Solutions' },
   },
 ]

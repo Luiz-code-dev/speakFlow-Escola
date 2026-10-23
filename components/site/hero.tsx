@@ -40,7 +40,7 @@ export function Hero() {
             className="inline-flex w-fit items-center gap-2 rounded-full border border-brand/20 bg-card/80 px-3 py-1.5 text-sm font-medium text-brand-ink backdrop-blur"
           >
             <Sparkles className="size-4 text-pink" aria-hidden="true" />
-            Inteligência artificial para redes municipais de ensino
+            Inteligência artificial para redes de ensino públicas e privadas
           </motion.p>
 
           <motion.h1
@@ -60,8 +60,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground sm:text-xl"
           >
-            Aprendizagem com inteligência artificial para toda a rede municipal, em qualquer
-            componente curricular.
+            Aprendizagem com inteligência artificial para toda a rede de ensino, pública ou
+            privada, em qualquer componente curricular.
           </motion.p>
 
           <ul className="flex flex-wrap gap-2" aria-label="Componentes curriculares">

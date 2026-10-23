@@ -27,7 +27,7 @@ export default function OgImage() {
           <span style={{ color: '#C4B5FD' }}>Cada nota com garantia.</span>
         </div>
         <div style={{ display: 'flex', fontSize: 28, color: '#C9BFE3' }}>
-          Aprendizagem com inteligência artificial para redes municipais
+          Aprendizagem com inteligência artificial para redes públicas e privadas
         </div>
       </div>
     ),

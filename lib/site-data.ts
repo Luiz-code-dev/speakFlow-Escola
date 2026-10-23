@@ -309,7 +309,7 @@ export const FAQ = [
     a: 'O modo projeção funciona com um computador na sala, e a plataforma roda em tablets de vários tamanhos.',
   },
   {
-    q: 'Precisa integrar com os sistemas da prefeitura?',
+    q: 'Precisa integrar com os sistemas da rede ou da escola?',
     a: 'Não para começar: escolas, turmas e alunos entram por planilha. Integrações com o sistema da rede podem ser feitas depois.',
   },
 ] as const

@@ -60,33 +60,36 @@ function GradesVisual() {
   const cells = useQrCells()
 
   return (
-    <div ref={ref} className="flex flex-col gap-8 rounded-[2rem] border border-border bg-card p-6 shadow-xl shadow-brand/10 sm:p-8" aria-hidden="true">
-      <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+    <div ref={ref} className="flex min-w-0 flex-col gap-8 overflow-hidden rounded-[2rem] border border-border bg-card p-6 shadow-xl shadow-brand/10 sm:p-8" aria-hidden="true">
+      <ol className="flex min-w-0 flex-col">
         {BLOCKS.map((hash, i) => (
-          <div key={hash} className="flex flex-col items-center gap-3 sm:flex-1 sm:flex-row">
+          <li key={hash} className="flex min-w-0 flex-col items-stretch">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, x: -16 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: i * 0.35, duration: 0.45 }}
-              className="flex w-full flex-col gap-1.5 rounded-xl border border-brand/25 bg-brand-soft/60 p-3"
+              className="flex min-w-0 items-center justify-between gap-3 rounded-xl border border-brand/25 bg-brand-soft/60 px-4 py-3"
             >
-              <span className="text-xs font-semibold text-brand-ink">Lançamento {i + 1}</span>
-              <span className="font-mono text-xs text-muted-foreground">{hash}</span>
+              <span className="flex min-w-0 items-center gap-2 text-sm font-semibold text-brand-ink">
+                <FileSignature className="size-4 shrink-0" />
+                <span className="truncate">Lançamento {i + 1}</span>
+              </span>
+              <span className="shrink-0 font-mono text-xs text-muted-foreground">{hash}</span>
             </motion.div>
             {i < BLOCKS.length - 1 ? (
               <motion.span
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: i * 0.35 + 0.3 }}
-                className="flex shrink-0 items-center text-pink"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={inView ? { opacity: 1, scaleY: 1 } : {}}
+                transition={{ delay: i * 0.35 + 0.3, duration: 0.3 }}
+                className="ml-6 flex h-7 origin-top items-center gap-2 text-pink"
               >
-                <span className="h-4 w-0.5 bg-pink shadow-[0_0_10px_rgba(219,39,119,0.9)] sm:h-0.5 sm:w-4" />
-                <Link2 className="size-4" />
+                <span className="h-full w-0.5 bg-pink shadow-[0_0_10px_rgba(219,39,119,0.9)]" />
+                <Link2 className="size-3.5" />
               </motion.span>
             ) : null}
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-muted p-6">

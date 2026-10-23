@@ -241,51 +241,230 @@ export const DEMO_CASES: DemoCase[] = [
 export const ROLES = [
   {
     id: 'secretaria',
-    label: 'Secretaria',
-    items: [
-      'Indicadores de toda a rede durante o ano',
-      'Matriz curricular por etapa e turno',
-      'Relatórios para prestar contas',
+    label: 'Secretaria de Educação',
+    summary: 'Visão de toda a rede durante o ano, não só quando chega a avaliação externa.',
+    groups: [
+      {
+        icon: 'network',
+        title: 'Organização da rede',
+        items: [
+          'Cadastro das escolas da rede',
+          'Ano letivo e períodos (bimestres ou trimestres)',
+          'Regras de notas da rede (escala, arredondamento, média mínima e recuperação)',
+          'Convites para diretores e coordenadores',
+        ],
+      },
+      {
+        icon: 'grid',
+        title: 'Matriz curricular',
+        items: [
+          'Componentes da BNCC por etapa, ano e turno',
+          'Carga horária por componente',
+          'Inclusão de componentes da parte diversificada da rede',
+        ],
+      },
+      {
+        icon: 'chart',
+        title: 'Acompanhamento',
+        items: [
+          'Indicadores por escola, turma e componente',
+          'Atividades realizadas e entregas no período',
+          'Diagnóstico de nível no início e ao longo do ano',
+          'Alerta de turmas com baixo desempenho',
+        ],
+      },
+      {
+        icon: 'shield',
+        title: 'Transparência e controle',
+        items: [
+          'Atas de notas assinadas e verificáveis por QR code',
+          'Auditoria de todas as ações',
+          'Retificações de notas registradas com justificativa',
+          'Relatórios para prestação de contas',
+        ],
+      },
     ],
+    connections: ['Define as regras para todas as escolas', 'Recebe os indicadores das turmas'],
   },
   {
     id: 'coordenacao',
     label: 'Coordenação pedagógica',
-    items: [
-      'Planos de ensino alinhados à BNCC',
-      'Aprovação de planos',
-      'Acompanhamento dos professores',
-      'Decisão sobre retificações',
+    summary: 'Planejamento alinhado à BNCC e acompanhamento do que acontece em cada turma.',
+    groups: [
+      {
+        icon: 'book',
+        title: 'Planos de ensino',
+        items: [
+          'Criação de planos por componente e ano',
+          'Unidades e assuntos vinculados às habilidades da BNCC',
+          'Revisão e aprovação dos planos dos professores',
+          'Reaproveitamento de planos entre turmas e anos',
+        ],
+      },
+      {
+        icon: 'users',
+        title: 'Acompanhamento dos professores',
+        items: [
+          'O que foi planejado e o que foi trabalhado',
+          'Atividades publicadas por turma',
+          'Andamento da correção e das notas',
+        ],
+      },
+      {
+        icon: 'clipboard',
+        title: 'Avaliações e notas',
+        items: [
+          'Visão das avaliações de cada período',
+          'Decisão sobre pedidos de retificação de notas',
+          'Fechamento do período com conferência',
+        ],
+      },
+      {
+        icon: 'target',
+        title: 'Aprendizagem',
+        items: ['Desempenho por critério de avaliação', 'Turmas e assuntos que precisam de reforço'],
+      },
     ],
+    connections: ['Aprova os planos dos professores', 'Decide as retificações'],
   },
   {
     id: 'direcao',
     label: 'Direção escolar',
-    items: [
-      'Turmas e alunos importados por planilha',
-      'Quadro de atribuições',
-      'Cartões de acesso',
-      'Passagem de ano sem perder histórico',
+    summary: 'A escola organizada em poucos minutos, sem cadastrar ninguém um por um.',
+    groups: [
+      {
+        icon: 'sheet',
+        title: 'Cadastro em lote',
+        items: [
+          'Importação de turmas, alunos e servidores por planilha (inclusive exportada do sistema da rede)',
+          'Conferência dos erros antes de confirmar',
+          'Convites enviados por e-mail automaticamente',
+        ],
+      },
+      {
+        icon: 'grid',
+        title: 'Turmas e atribuições',
+        items: [
+          'Turmas por ano e turno',
+          'Quadro de atribuições (professor × componente × turma)',
+          'Troca de professor sem perder histórico',
+        ],
+      },
+      {
+        icon: 'qr',
+        title: 'Acesso dos alunos',
+        items: [
+          'Cartões de acesso com QR code para imprimir',
+          'Acesso por código da aula e matrícula, sem e-mail',
+          'Senha por figuras para os anos iniciais',
+          'Redefinição de acesso pela própria escola',
+        ],
+      },
+      {
+        icon: 'school',
+        title: 'Vida escolar',
+        items: [
+          'Enturmação, transferência e remanejamento',
+          'Passagem de ano sem perder histórico',
+          'Visão das notas e atividades de todas as turmas da escola',
+        ],
+      },
     ],
+    connections: ['Cadastra turmas e alunos', 'Distribui os cartões de acesso'],
   },
   {
     id: 'professor',
     label: 'Professor',
-    items: [
-      'Atividades com IA',
-      'Primeira correção automática',
-      'Notas revisadas e publicadas com segurança',
+    summary: 'A IA faz a primeira correção. O professor decide.',
+    groups: [
+      {
+        icon: 'book',
+        title: 'Planejamento',
+        items: ['Plano de ensino da turma com assuntos da BNCC', 'Atividades ligadas a cada assunto'],
+      },
+      {
+        icon: 'sparkles',
+        title: 'Atividades com IA',
+        items: [
+          'Atividades de escrita, de fala e quiz',
+          'Sugestão de enunciado e critérios de avaliação pela IA (o professor edita)',
+          'Critérios com pesos definidos pelo professor',
+          'Prazo e número de tentativas',
+        ],
+      },
+      {
+        icon: 'pen',
+        title: 'Correção',
+        items: [
+          'Primeira correção automática com nota sugerida e comentários',
+          'Ouvir a gravação do aluno',
+          'Ajustar a nota e comentar',
+          'Confirmar várias notas de uma vez, com revisão antes',
+        ],
+      },
+      {
+        icon: 'lock',
+        title: 'Notas com segurança',
+        items: [
+          'Planilha de notas por avaliação',
+          'Publicação protegida por senha',
+          'Nota publicada não pode ser apagada',
+          'Retificação só com justificativa e aprovação',
+        ],
+      },
+      {
+        icon: 'projector',
+        title: 'Sala de aula',
+        items: ['Modo sala para projetar no quadro', 'Abrir a aula para os alunos entrarem com o código'],
+      },
     ],
+    connections: ['Segue o plano aprovado', 'Envia atividades aos alunos', 'Publica as notas'],
   },
   {
     id: 'aluno',
     label: 'Aluno',
-    items: [
-      'Entra com cartão QR, código da aula ou matrícula',
-      'Pratica fala e escrita',
-      'Recebe retorno na hora',
-      'Acompanha a própria evolução',
+    summary: 'Pratica, recebe retorno na hora e acompanha a própria evolução.',
+    groups: [
+      {
+        icon: 'qr',
+        title: 'Acesso simples',
+        items: [
+          'Cartão QR, código da aula ou matrícula',
+          'Senha por figuras nos anos iniciais',
+          'Funciona em tablet, computador e celular',
+        ],
+      },
+      {
+        icon: 'list',
+        title: 'Atividades',
+        items: [
+          'Lista do que fazer, por prazo',
+          'Escrita com rascunho salvo automaticamente',
+          'Fala com gravação, ouvir antes de enviar e gravar de novo',
+          'Quiz com uma pergunta por tela',
+        ],
+      },
+      {
+        icon: 'sparkles',
+        title: 'Retorno da IA',
+        items: [
+          'O que acertou, como melhorar e exemplo de resposta',
+          'Transcrição da própria fala',
+          'Nova tentativa quando o professor permite',
+        ],
+      },
+      {
+        icon: 'chart',
+        title: 'Notas e evolução',
+        items: ['Notas publicadas pelo professor', 'Evolução por componente, sem comparação com colegas'],
+      },
+      {
+        icon: 'shield',
+        title: 'Ambiente protegido',
+        items: ['Sem rede social, chat, anúncios ou ranking entre colegas'],
+      },
     ],
+    connections: ['Recebe as atividades do professor', 'Vê as notas publicadas'],
   },
 ] as const
 

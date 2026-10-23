@@ -40,7 +40,6 @@ export const metadata: Metadata = {
     description,
   },
   twitter: { card: 'summary_large_image', title, description },
-  icons: { icon: '/icon.svg' },
   robots: { index: true, follow: true },
 }
 

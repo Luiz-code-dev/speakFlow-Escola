@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CONTACT_EMAIL } from '@/lib/site-data'
+import { CODEVELOP_URL, CONTACT_EMAIL } from '@/lib/site-data'
 import { Logo } from './logo'
 
 export function SiteFooter() {
@@ -10,7 +10,17 @@ export function SiteFooter() {
           <div className="flex max-w-sm flex-col gap-4">
             <Logo />
             <p className="leading-relaxed text-muted-foreground">
-              Um produto SpeakFlow, desenvolvido pela Codevelop Solutions.
+              Um produto SpeakFlow, desenvolvido pela{' '}
+              <a
+                href={CODEVELOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-brand underline-offset-4 hover:underline"
+              >
+                Codevelop Solutions
+                <span className="sr-only"> (abre em nova aba)</span>
+              </a>
+              .
             </p>
           </div>
           <address className="flex max-w-md flex-col gap-2 text-sm leading-relaxed text-muted-foreground not-italic">
@@ -43,6 +53,17 @@ export function SiteFooter() {
               <li>
                 <a href="https://speakflow.ia.br" className="hover:text-brand-ink hover:underline">
                   speakflow.ia.br
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CODEVELOP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-ink hover:underline"
+                >
+                  codevelop.com.br
+                  <span className="sr-only"> (abre em nova aba)</span>
                 </a>
               </li>
             </ul>

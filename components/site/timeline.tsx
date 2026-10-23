@@ -193,10 +193,10 @@ export function Timeline() {
         <VerticalTimeline />
       ) : (
         <>
-          <div className="hidden lg:block">
+          <div className="hidden tall-desktop:block">
             <HorizontalTimeline />
           </div>
-          <div className="lg:hidden">
+          <div className="tall-desktop:hidden">
             <VerticalTimeline />
           </div>
         </>

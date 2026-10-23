@@ -1,4 +1,5 @@
-export const SITE_URL = 'https://speakflow.ia.br'
+export const SITE_URL = 'https://speakflowescola.com.br'
+export const CODEVELOP_URL = 'https://codevelop.com.br'
 export const CONTACT_EMAIL = 'luiz.melo@cdsolutions.com.br'
 
 export const NAV_ITEMS = [

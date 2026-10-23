@@ -22,6 +22,15 @@ const schema = z.object({
   consentimento: z.literal('on', { error: 'É preciso concordar para enviarmos o retorno.' }),
 })
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_PER_WINDOW = 5
 const hits = new Map<string, number[]>()
@@ -77,26 +86,37 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
   }
 
   const d = parsed.data
-  const text = [
-    `Nome: ${d.nome}`,
-    `Cargo: ${d.cargo}`,
-    `Município/UF: ${d.municipio}`,
-    `E-mail: ${d.email}`,
-    `Telefone: ${d.telefone || '—'}`,
-    `Alunos na rede (aprox.): ${d.alunos || '—'}`,
-    '',
-    'Mensagem:',
-    d.mensagem,
-  ].join('\n')
+  const rows: [string, string][] = [
+    ['Nome', d.nome],
+    ['Cargo', d.cargo],
+    ['Município/UF', d.municipio],
+    ['E-mail', d.email],
+    ['Telefone', d.telefone || '—'],
+    ['Alunos na rede (aprox.)', d.alunos || '—'],
+  ]
+  const text = [...rows.map(([k, v]) => `${k}: ${v}`), '', 'Mensagem:', d.mensagem].join('\n')
+  const html = `<div style="font-family:Inter,Arial,sans-serif;color:#1F1A2E;max-width:560px">
+<h2 style="color:#4C1D95;margin:0 0 16px">Novo pedido de demonstração</h2>
+<table style="border-collapse:collapse;width:100%">${rows
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:6px 12px 6px 0;color:#5B5470;white-space:nowrap">${k}</td><td style="padding:6px 0;font-weight:600">${escapeHtml(v)}</td></tr>`,
+    )
+    .join('')}</table>
+<p style="margin:20px 0 6px;color:#5B5470">Mensagem</p>
+<p style="margin:0;white-space:pre-wrap;line-height:1.6">${escapeHtml(d.mensagem)}</p>
+<p style="margin-top:24px;font-size:12px;color:#5B5470">Enviado pelo formulário de speakflowescola.com.br. Responda este e-mail para falar direto com o contato.</p>
+</div>`
 
   try {
     const resend = new Resend(apiKey)
     const { error } = await resend.emails.send({
       from: process.env.RESEND_FROM ?? 'SpeakFlow Escolas <onboarding@resend.dev>',
-      to: [CONTACT_EMAIL],
+      to: [process.env.B2B_NOTIFY_EMAIL || CONTACT_EMAIL],
       replyTo: d.email,
-      subject: `Demonstração SpeakFlow Escolas — ${d.municipio}`,
+      subject: `Demonstração SpeakFlow Escolas — ${d.municipio.replace(/[\r\n]+/g, ' ')}`,
       text,
+      html,
     })
     if (error) throw new Error(error.message)
   } catch (err) {

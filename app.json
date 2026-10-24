@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "SpeakFlow Escolas",
+    "slug": "v0-project",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4F46E5"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4F46E5"
+      },
+      "package": "br.com.speakflow.escolas",
+      "versionCode": 2,
+      "kotlinVersion": "1.9.24",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ],
+      "allowBackup": false
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "br.com.speakflow.escolas"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "91793822-7ad9-4eab-9f9e-8b2abf62f57b"
+      }
+    },
+    "owner": "codevelopsolutions"
+  }
+}

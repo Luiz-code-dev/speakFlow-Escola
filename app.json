@@ -35,6 +35,16 @@
         "projectId": "91793822-7ad9-4eab-9f9e-8b2abf62f57b"
       }
     },
-    "owner": "codevelopsolutions"
+    "owner": "codevelopsolutions",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.25"
+          }
+        }
+      ]
+    ]
   }
 }

@@ -11,18 +11,18 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <a href="#inicio" aria-label="SpeakFlow Escolas — início" className="rounded-lg">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 2xl:max-w-none 2xl:px-8">
+        <a href="#inicio" aria-label="SpeakFlow Escolas — início" className="shrink-0 rounded-lg">
           <Logo />
         </a>
 
-        <nav aria-label="Seções da página" className="hidden xl:block">
-          <ul className="flex items-center gap-1">
+        <nav aria-label="Seções da página" className="hidden 2xl:block">
+          <ul className="flex items-center gap-0.5">
             {NAV_ITEMS.slice(1).map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="rounded-lg px-2 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-brand-soft hover:text-brand-ink"
+                  className="rounded-lg px-1.5 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-brand-soft hover:text-brand-ink"
                 >
                   {item.label}
                 </a>
@@ -31,7 +31,7 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           {FAMILY_ENABLED && (
             <a
               href={FAMILY_LOGIN_URL}
@@ -48,7 +48,7 @@ export function SiteHeader() {
           </a>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="inline-flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground xl:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground 2xl:hidden"
               aria-label="Abrir menu"
             >
               <Menu className="size-5" aria-hidden="true" />

@@ -10,6 +10,9 @@ import {
   ClipboardCheck,
   FileSpreadsheet,
   GraduationCap,
+  HeartHandshake,
+  KeyRound,
+  Lightbulb,
   Link2,
   ListTodo,
   Network,
@@ -22,6 +25,7 @@ import {
 } from 'lucide-react'
 import { ROLES, type RoleId } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
+import { FamilyPhone } from './family'
 import { SectionHeading } from './primitives'
 import { TrailMockup } from './trail-mockup'
 
@@ -31,6 +35,7 @@ const ROLE_ICONS: Record<RoleId, typeof Building2> = {
   direcao: School,
   professor: Users,
   aluno: GraduationCap,
+  familia: HeartHandshake,
 }
 
 type GroupIcon = (typeof ROLES)[number]['groups'][number]['icon']
@@ -45,6 +50,8 @@ const GROUP_ICONS: Record<GroupIcon, typeof Building2> = {
   users: Users,
   sparkles: Sparkles,
   list: ListTodo,
+  key: KeyRound,
+  lightbulb: Lightbulb,
 }
 
 function Bar({ w, tone = 'brand' }: { w: string; tone?: 'brand' | 'pink' | 'muted' }) {
@@ -242,6 +249,8 @@ function Mockup({ role }: { role: RoleId }) {
       return <Heatmap />
     case 'aluno':
       return <TrailMockup feedbackDelay={0.8} />
+    case 'familia':
+      return <FamilyPhone compact />
   }
 }
 
@@ -371,8 +380,8 @@ export function Roles() {
         <SectionHeading
           id="roles-title"
           eyebrow="Para cada papel"
-          title="Uma plataforma, cinco perfis, cada um com a sua área"
-          description="Cada pessoa entra e vê só o que precisa para o seu trabalho. Tudo conectado: o que a Secretaria define chega à escola, ao professor e ao aluno em casa."
+          title="Uma plataforma, seis perfis, cada um com a sua área"
+          description="Cada pessoa entra e vê só o que precisa. Tudo conectado: o que a Secretaria define chega à escola, ao professor, ao aluno em casa e à família que acompanha."
         />
         <div className="grid min-w-0 gap-6 lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-start">
           <div

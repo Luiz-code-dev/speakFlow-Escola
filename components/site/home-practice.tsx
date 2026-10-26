@@ -37,7 +37,7 @@ const FEATURES = [
   },
   {
     title: 'Família junto',
-    text: 'Pais e responsáveis veem o resumo do que o filho praticou na semana.',
+    text: 'Pais e responsáveis têm acesso próprio: veem a semana do filho, a trilha e a evolução. Quem tem mais de um filho acompanha todos com o mesmo login.',
     icon: HeartHandshake,
   },
   {
@@ -52,6 +52,7 @@ const WEEK = [
   { where: 'Em casa', what: 'aluno pratica', icon: House },
   { where: 'Na hora', what: 'IA explica', icon: Sparkles },
   { where: 'No painel', what: 'escola acompanha', icon: LayoutDashboard },
+  { where: 'Em família', what: 'Os pais veem o resumo da semana e uma dica de como ajudar.', icon: HeartHandshake },
 ]
 
 export function HomePractice() {
@@ -87,7 +88,7 @@ export function HomePractice() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute top-6 right-[12.5%] left-[12.5%] hidden h-0.5 origin-left bg-gradient-to-r from-brand via-pink to-brand md:block"
+              className="absolute top-6 right-[10%] left-[10%] hidden h-0.5 origin-left bg-gradient-to-r from-brand via-pink to-brand md:block"
               aria-hidden="true"
             />
             <motion.span
@@ -98,7 +99,7 @@ export function HomePractice() {
               className="absolute top-6 bottom-6 left-6 w-0.5 origin-top -translate-x-1/2 bg-gradient-to-b from-brand via-pink to-brand md:hidden"
               aria-hidden="true"
             />
-            <ol className="relative grid gap-5 md:grid-cols-4 md:gap-4">
+            <ol className="relative grid gap-5 md:grid-cols-5 md:gap-4">
               {WEEK.map((step, i) => (
                 <motion.li
                   key={step.where}

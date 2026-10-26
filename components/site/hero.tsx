@@ -61,9 +61,10 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground sm:text-xl"
           >
-            O aluno pratica no que ainda não domina, recebe retorno imediato da inteligência
-            artificial, e a escola sabe quem avançou e quem precisa de ajuda. Em qualquer componente
-            curricular.
+            O aluno pratica em casa no que ainda não domina e recebe retorno imediato da inteligência
+            artificial. A escola sabe quem precisa de ajuda, e{' '}
+            <strong className="font-semibold text-foreground">a família acompanha a evolução de cada filho</strong>
+            . Em qualquer componente curricular.
           </motion.p>
 
           <ul className="flex flex-wrap gap-2" aria-label="Componentes curriculares">

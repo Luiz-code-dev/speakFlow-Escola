@@ -67,6 +67,13 @@ export function Security() {
         </div>
 
         <Reveal>
+          <p className="leading-relaxed text-night-foreground">
+            <strong className="font-bold">A família vê só os próprios filhos</strong>, com acesso
+            registrado e que a escola pode revogar.
+          </p>
+        </Reveal>
+
+        <Reveal>
           <p className="max-w-3xl rounded-2xl border border-night-foreground/15 bg-night-foreground/[0.06] p-5 leading-relaxed text-night-foreground">
             <strong className="font-bold">Lei 15.100/2025:</strong> O reforço é feito em casa, fora do
             horário de aula. Na escola, o uso fica restrito ao fim pedagógico orientado pelo professor.

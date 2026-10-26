@@ -1,6 +1,7 @@
 export const SITE_URL = 'https://speakflowescola.com.br'
 export const CODEVELOP_URL = 'https://codevelop.com.br'
 export const CONTACT_EMAIL = 'luiz.melo@cdsolutions.com.br'
+export const FAMILY_LOGIN_URL = 'https://www.speakflow.ia.br/escola/familia/entrar'
 
 export const NAV_ITEMS = [
   { href: '#inicio', label: 'Início' },
@@ -9,6 +10,7 @@ export const NAV_ITEMS = [
   { href: '#como-funciona', label: 'Como funciona' },
   { href: '#demonstracao', label: 'Demonstração' },
   { href: '#reforco-em-casa', label: 'Reforço em casa' },
+  { href: '#familia', label: 'Família' },
   { href: '#papeis', label: 'Para cada papel' },
   { href: '#seguranca', label: 'Segurança' },
   { href: '#implantacao', label: 'Implantação' },
@@ -294,6 +296,7 @@ export const ROLES = [
           'Participação semanal por escola',
           'Habilidades da BNCC em defasagem e recuperadas',
           'Evolução entre diagnósticos',
+          'Famílias acompanhando, por escola',
         ],
       },
       {
@@ -339,6 +342,7 @@ export const ROLES = [
           'Cadastro de turmas e alunos por planilha',
           'Cartões de acesso para levar para casa',
           'Comunicação com as famílias',
+          'Famílias: quem já acompanha, convites pendentes e novo código de família',
         ],
       },
       {
@@ -384,6 +388,38 @@ export const ROLES = [
       },
     ],
   },
+  {
+    id: 'familia',
+    label: 'Família',
+    summary: 'Acompanha a evolução de cada filho e sabe como ajudar em casa.',
+    connection: 'Recebe o acesso pela escola · Acompanha o que o aluno pratica',
+    groups: [
+      {
+        icon: 'key',
+        title: 'Acesso',
+        items: [
+          'Login próprio, separado do aluno',
+          'Um login para todos os filhos',
+          'Entrada por convite ou código de família',
+        ],
+      },
+      {
+        icon: 'chart',
+        title: 'Acompanhamento',
+        items: ['Semana do filho', 'Trilha atual', 'Evolução por habilidade', 'Últimos retornos da IA'],
+      },
+      {
+        icon: 'lightbulb',
+        title: 'Apoio',
+        items: [
+          'Dica de como ajudar',
+          'Aviso de 7 dias sem praticar',
+          'Resumo semanal por e-mail',
+          'Contato da escola',
+        ],
+      },
+    ],
+  },
 ] as const
 
 export type RoleId = (typeof ROLES)[number]['id']
@@ -408,6 +444,22 @@ export const FAQ = [
   {
     q: 'Isso substitui as notas da escola?',
     a: 'Não. O SpeakFlow Escolas é para reforço e recomposição da aprendizagem. As notas oficiais continuam no sistema da rede.',
+  },
+  {
+    q: 'Os pais conseguem acompanhar?',
+    a: 'Sim. Pais e responsáveis têm um acesso próprio, separado do aluno, para ver a semana, a trilha e a evolução do filho, com dicas de como ajudar em casa.',
+  },
+  {
+    q: 'Tenho mais de um filho na rede. Preciso de vários logins?',
+    a: 'Não. Com um único login você acompanha todos os seus filhos, mesmo que estudem em escolas diferentes da rede.',
+  },
+  {
+    q: 'Mais de uma pessoa da família pode acompanhar o mesmo aluno?',
+    a: 'Sim. Mãe, pai, avós ou tutor podem ter cada um o seu acesso, cadastrados pela escola.',
+  },
+  {
+    q: 'E se a família não tiver e-mail?',
+    a: 'O acesso pode ser feito com o código de família impresso no cartão do aluno e a data de nascimento dele.',
   },
   {
     q: 'E os dados dos alunos?',

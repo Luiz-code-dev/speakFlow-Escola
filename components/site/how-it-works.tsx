@@ -26,8 +26,8 @@ const STEPS = [
     icon: Sparkles,
   },
   {
-    title: 'Escola acompanha',
-    text: 'o professor vê quem praticou, quem avançou e quem precisa de ajuda',
+    title: 'Escola e família acompanham',
+    text: 'o professor vê quem precisa de ajuda; pais e responsáveis veem a evolução do filho',
     icon: LayoutDashboard,
   },
 ]

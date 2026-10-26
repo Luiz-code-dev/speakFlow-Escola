@@ -1,5 +1,6 @@
 import { Contact } from '@/components/site/contact'
 import { Demo } from '@/components/site/demo'
+import { Family } from '@/components/site/family'
 import { Faq } from '@/components/site/faq'
 import { SiteFooter } from '@/components/site/footer'
 import { SiteHeader } from '@/components/site/header'
@@ -61,6 +62,7 @@ export default function Home() {
         <HowItWorks />
         <Demo />
         <HomePractice />
+        <Family />
         <Roles />
         <Security />
         <Implementation />

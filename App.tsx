@@ -15,7 +15,7 @@ const { default: WebView } = require("react-native-webview") as {
 
 SplashScreen.preventAutoHideAsync();
 
-const ESCOLA_URL = "https://speakflow.ia.br/escola/entrar";
+const ESCOLA_URL = "https://speakflow.ia.br/escola/inicio";
 const INDIGO = "#4F46E5";
 
 export default function App() {

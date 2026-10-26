@@ -7,7 +7,7 @@ import { SiteHeader } from '@/components/site/header'
 import { Hero } from '@/components/site/hero'
 import { HomePractice } from '@/components/site/home-practice'
 import { HowItWorks } from '@/components/site/how-it-works'
-import { Implementation } from '@/components/site/implementation'
+import { StudentWeek } from '@/components/site/implementation'
 import { Need } from '@/components/site/need'
 import { Roles } from '@/components/site/roles'
 import { Security } from '@/components/site/security'
@@ -65,7 +65,7 @@ export default function Home() {
         <Family />
         <Roles />
         <Security />
-        <Implementation />
+        <StudentWeek />
         <Faq />
         <Contact />
       </main>

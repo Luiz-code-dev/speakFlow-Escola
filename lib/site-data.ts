@@ -14,7 +14,7 @@ export const NAV_ITEMS = [
   { href: '#familia', label: 'Família' },
   { href: '#papeis', label: 'Para cada papel' },
   { href: '#seguranca', label: 'Segurança' },
-  { href: '#implantacao', label: 'Implantação' },
+  { href: '#semana-do-aluno', label: 'Semana do aluno' },
   { href: '#contato', label: 'Contato' },
 ] as const
 

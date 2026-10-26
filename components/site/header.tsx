@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { FAMILY_LOGIN_URL, NAV_ITEMS } from '@/lib/site-data'
+import { FAMILY_ENABLED, FAMILY_LOGIN_URL, NAV_ITEMS } from '@/lib/site-data'
 import { Logo } from './logo'
 
 export function SiteHeader() {
@@ -32,12 +32,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={FAMILY_LOGIN_URL}
-            className="hidden h-10 shrink-0 items-center rounded-xl px-3 text-sm font-semibold whitespace-nowrap text-brand-ink transition-colors hover:bg-brand-soft sm:inline-flex"
-          >
-            Sou responsável
-          </a>
+          {FAMILY_ENABLED && (
+            <a
+              href={FAMILY_LOGIN_URL}
+              className="hidden h-10 shrink-0 items-center rounded-xl px-3 text-sm font-semibold whitespace-nowrap text-brand-ink transition-colors hover:bg-brand-soft sm:inline-flex"
+            >
+              Sou responsável
+            </a>
+          )}
           <a
             href="#contato"
             className="hidden h-10 shrink-0 items-center rounded-xl whitespace-nowrap bg-brand px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-brand-hover sm:inline-flex"
@@ -76,12 +78,14 @@ export function SiteHeader() {
               >
                 Agendar demonstração
               </a>
-              <a
-                href={FAMILY_LOGIN_URL}
-                className="mt-2 inline-flex h-12 items-center justify-center rounded-xl border border-brand/30 px-4 font-semibold text-brand-ink hover:bg-brand-soft"
-              >
-                Sou responsável
-              </a>
+              {FAMILY_ENABLED && (
+                <a
+                  href={FAMILY_LOGIN_URL}
+                  className="mt-2 inline-flex h-12 items-center justify-center rounded-xl border border-brand/30 px-4 font-semibold text-brand-ink hover:bg-brand-soft"
+                >
+                  Sou responsável
+                </a>
+              )}
             </SheetContent>
           </Sheet>
         </div>

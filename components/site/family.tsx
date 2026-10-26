@@ -13,6 +13,7 @@ import {
   Users,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { FAMILY_ENABLED, FAMILY_LOGIN_URL } from '@/lib/site-data'
 import { Reveal, SectionHeading } from './primitives'
 
 const FAMILY_FEATURES = [
@@ -286,6 +287,14 @@ export function Family() {
             turma. A escola pode desvincular um responsável quando necessário, por exemplo por decisão
             judicial.
           </p>
+          {FAMILY_ENABLED && (
+            <a
+              href={FAMILY_LOGIN_URL}
+              className="inline-flex h-12 items-center justify-center self-start rounded-xl border border-brand/30 bg-card px-5 font-semibold text-brand-ink transition-colors hover:bg-brand-soft"
+            >
+              Entrar na área da família
+            </a>
+          )}
         </div>
       </div>
     </section>

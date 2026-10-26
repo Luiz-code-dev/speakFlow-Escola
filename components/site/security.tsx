@@ -3,18 +3,17 @@ import { Reveal, SectionHeading } from './primitives'
 
 const HAS = ['Atividades do seu professor', 'Retorno imediato', 'Sua evolução', 'Acesso sem e-mail']
 const HAS_NOT = [
-  'Rede social',
-  'Chat',
-  'Anúncios',
-  'Compras',
-  'Perfil público',
-  'Notificações para prender a atenção',
+  'Rede social, chat ou contato com desconhecidos',
+  'Anúncios ou compras',
+  'Perfil público, foto ou localização',
+  'Ranking entre colegas ou notificações para prender a atenção',
 ]
 const SEALS = [
   'LGPD',
   'ECA Digital (Lei 15.211/2025)',
   'Lei 15.100/2025',
   'Política Nacional de Educação Digital (Lei 14.533/2023)',
+  'Decreto 12.391/2025 (Recomposição das Aprendizagens)',
 ]
 
 export function Security() {
@@ -27,6 +26,7 @@ export function Security() {
             id="security-title"
             eyebrow="Segurança e proteção de dados"
             title="Um ambiente feito só para aprender."
+            description="Em casa, sem o professor ao lado, a proteção precisa estar no desenho da plataforma."
           />
           <div className="relative flex size-36 shrink-0 items-center justify-center self-center" aria-hidden="true">
             <span className="absolute inset-0 animate-ping-slow rounded-full bg-brand/40" />
@@ -55,8 +55,8 @@ export function Security() {
             <h3 className="text-xl font-bold text-night-foreground">O aluno não tem</h3>
             <ul className="flex flex-col gap-3">
               {HAS_NOT.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-night-foreground">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-pink">
+                <li key={item} className="flex items-start gap-3 leading-relaxed text-night-foreground">
+                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-pink">
                     <X className="size-3.5" aria-hidden="true" />
                   </span>
                   {item}
@@ -65,6 +65,13 @@ export function Security() {
             </ul>
           </Reveal>
         </div>
+
+        <Reveal>
+          <p className="max-w-3xl rounded-2xl border border-night-foreground/15 bg-night-foreground/[0.06] p-5 leading-relaxed text-night-foreground">
+            <strong className="font-bold">Lei 15.100/2025:</strong> O reforço é feito em casa, fora do
+            horário de aula. Na escola, o uso fica restrito ao fim pedagógico orientado pelo professor.
+          </p>
+        </Reveal>
 
         <ul className="flex flex-wrap gap-3" aria-label="Legislação observada">
           {SEALS.map((seal) => (

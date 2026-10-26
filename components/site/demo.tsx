@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { Check, Lightbulb, Loader2, Quote, Sparkles, TrendingUp } from 'lucide-react'
-import { DEMO_CASES, type DemoCase } from '@/lib/site-data'
+import { ArrowRight, Check, Lightbulb, Loader2, Quote, RotateCcw, Sparkles, TrendingUp } from 'lucide-react'
+import { DEMO_CASES, type DemoCase, type Mastery } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 import { SectionHeading } from './primitives'
 
@@ -17,33 +17,36 @@ function Rich({ text }: { text: string }) {
   )
 }
 
-const formatScore = (n: number) =>
-  n.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+const LEVELS: Mastery[] = ['Ainda não', 'Quase lá', 'Domina']
 
-function ScoreRing({ score }: { score: number }) {
+function MasteryRing({ mastery }: { mastery: Mastery }) {
   const r = 42
   const c = 2 * Math.PI * r
+  const segment = c / 3
+  const gap = 6
+  const level = LEVELS.indexOf(mastery) + 1
   return (
     <div className="relative size-28 shrink-0">
       <svg viewBox="0 0 100 100" className="size-full -rotate-90" aria-hidden="true">
-        <circle cx="50" cy="50" r={r} fill="none" stroke="var(--color-brand-soft)" strokeWidth="9" />
-        <motion.circle
-          cx="50"
-          cy="50"
-          r={r}
-          fill="none"
-          stroke="var(--color-brand)"
-          strokeWidth="9"
-          strokeLinecap="round"
-          strokeDasharray={c}
-          initial={{ strokeDashoffset: c }}
-          animate={{ strokeDashoffset: c * (1 - score / 10) }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-        />
+        {LEVELS.map((label, i) => (
+          <motion.circle
+            key={label}
+            cx="50"
+            cy="50"
+            r={r}
+            fill="none"
+            strokeWidth="9"
+            strokeLinecap="round"
+            strokeDasharray={`${segment - gap} ${c - segment + gap}`}
+            strokeDashoffset={-i * segment}
+            initial={{ stroke: 'var(--color-brand-soft)' }}
+            animate={{ stroke: i < level ? 'var(--color-brand)' : 'var(--color-brand-soft)' }}
+            transition={{ delay: 0.2 + i * 0.35, duration: 0.4 }}
+          />
+        ))}
       </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-3xl font-extrabold text-foreground">{formatScore(score)}</span>
-        <span className="text-xs text-muted-foreground">de 10</span>
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-center">
+        <span className="text-base leading-tight font-extrabold text-foreground">{mastery}</span>
       </div>
     </div>
   )
@@ -77,7 +80,15 @@ function AnswerPanel({ demo, typed, phase }: { demo: DemoCase; typed: string; ph
   )
 }
 
-function Feedback({ demo }: { demo: DemoCase }) {
+function Feedback({
+  demo,
+  onRetry,
+  onNext,
+}: {
+  demo: DemoCase
+  onRetry: () => void
+  onNext: () => void
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -85,12 +96,30 @@ function Feedback({ demo }: { demo: DemoCase }) {
       transition={{ duration: 0.5 }}
       className="flex flex-col gap-6"
     >
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-semibold text-muted-foreground">Habilidade trabalhada</p>
+        <p className="text-lg font-bold text-balance text-foreground">{demo.skill}</p>
+      </div>
       <div className="flex items-center gap-5">
-        <ScoreRing score={demo.score} />
-        <div className="flex flex-col gap-1">
-          <p className="text-sm font-semibold text-muted-foreground">Nota sugerida</p>
+        <MasteryRing mastery={demo.mastery} />
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-semibold text-muted-foreground">Domínio da habilidade</p>
+          <ul className="flex flex-wrap gap-1.5" aria-label="Níveis de domínio">
+            {LEVELS.map((label) => (
+              <li
+                key={label}
+                aria-current={label === demo.mastery ? 'true' : undefined}
+                className={cn(
+                  'rounded-full px-2.5 py-0.5 text-xs font-semibold',
+                  label === demo.mastery ? 'bg-brand text-primary-foreground' : 'bg-muted text-muted-foreground',
+                )}
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
           <p className="text-sm leading-relaxed text-foreground">
-            Nota sugerida — o professor revisa antes de publicar
+            O professor acompanha este retorno no painel da turma.
           </p>
         </div>
       </div>
@@ -102,6 +131,24 @@ function Feedback({ demo }: { demo: DemoCase }) {
           Exemplo de resposta
         </p>
         <p className="leading-relaxed text-foreground">{demo.example}</p>
+      </div>
+      <div className="flex flex-col gap-3 xl:flex-row">
+        <button
+          type="button"
+          onClick={onRetry}
+          className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-brand px-5 font-semibold text-primary-foreground transition-colors hover:bg-brand-hover"
+        >
+          <RotateCcw className="size-4" aria-hidden="true" />
+          Tentar de novo
+        </button>
+        <button
+          type="button"
+          onClick={onNext}
+          className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-border bg-card px-5 font-semibold text-brand-ink transition-colors hover:bg-brand-soft"
+        >
+          Próxima atividade da trilha
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </button>
       </div>
     </motion.div>
   )
@@ -237,7 +284,7 @@ export function Demo() {
               ))}
             </div>
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-pink/30 bg-pink-soft px-3 py-1 text-xs font-bold tracking-wide text-pink-strong uppercase">
-              Demonstração
+              Demonstração · atividade de reforço
             </span>
           </div>
 
@@ -280,10 +327,19 @@ export function Demo() {
                     className="flex flex-col items-center gap-4 text-center"
                   >
                     <Loader2 className="size-10 animate-spin text-brand" aria-hidden="true" />
-                    <p className="font-semibold text-foreground">Analisando a resposta com a rubrica do componente…</p>
+                    <p className="font-semibold text-foreground">Analisando a resposta com o critério de avaliação…</p>
                   </motion.div>
                 ) : phase === 'done' ? (
-                  <Feedback key="done" demo={demo} />
+                  <Feedback
+                    key="done"
+                    demo={demo}
+                    onRetry={() => select(active)}
+                    onNext={() => {
+                      const next = (active + 1) % DEMO_CASES.length
+                      select(next)
+                      tabRefs.current[next]?.focus()
+                    }}
+                  />
                 ) : (
                   <motion.p
                     key="idle"
@@ -292,8 +348,8 @@ export function Demo() {
                     exit={{ opacity: 0 }}
                     className="text-center leading-relaxed text-muted-foreground"
                   >
-                    Clique em &quot;Ver retorno da IA&quot; para ver a nota sugerida e as orientações
-                    para o aluno.
+                    Clique em &quot;Ver retorno da IA&quot; para ver o domínio da habilidade e as
+                    orientações para o aluno.
                   </motion.p>
                 )}
               </AnimatePresence>

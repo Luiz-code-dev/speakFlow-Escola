@@ -1,25 +1,25 @@
-import { BarChart3, Handshake, Presentation, Settings2 } from 'lucide-react'
+import { BarChart3, Handshake, House, Settings2 } from 'lucide-react'
 import { Reveal, SectionHeading } from './primitives'
 
 const STEPS = [
   {
     title: 'Acordo',
-    text: 'Apresentação à equipe, definição das escolas, formalização do contrato.',
+    text: 'Apresentação à equipe, definição das escolas e prioridades do reforço, formalização do contrato.',
     icon: Handshake,
   },
   {
     title: 'Implantação',
-    text: 'Cadastro por planilha, formação de professores, diagnóstico inicial.',
+    text: 'Cadastro por planilha, formação de professores, diagnóstico inicial, apresentação às famílias e entrega dos cartões.',
     icon: Settings2,
   },
   {
-    title: 'Uso em sala',
-    text: 'Atividades semanais, acompanhamento, suporte direto.',
-    icon: Presentation,
+    title: 'Reforço em casa',
+    text: 'Trilhas semanais, visitas quinzenais, suporte direto.',
+    icon: House,
   },
   {
     title: 'Resultados',
-    text: 'Diagnóstico de nível, relatório da rede, ajustes com a Secretaria.',
+    text: 'Novo diagnóstico, relatório da rede, ajustes com a Secretaria.',
     icon: BarChart3,
   },
 ]
@@ -49,8 +49,8 @@ export function Implementation() {
         </ol>
         <Reveal>
           <p className="max-w-3xl text-lg leading-relaxed text-pretty text-foreground">
-            Funciona em tablets de 7 a 13 polegadas, computadores e no projetor da sala. A
-            implantação pode ser na rede toda ou em etapas, por grupo de escolas.
+            Funciona no celular, tablet ou computador. A implantação pode ser na rede toda ou em
+            etapas, por grupo de escolas.
           </p>
         </Reveal>
       </div>

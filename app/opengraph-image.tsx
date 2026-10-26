@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'SpeakFlow Escolas — Cada aluno com retorno imediato. Cada nota com garantia.'
+export const alt = 'SpeakFlow Escolas — Reforço escolar em casa, com retorno na hora, para cada aluno.'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -23,11 +23,11 @@ export default function OgImage() {
           SpeakFlow<span style={{ color: '#FCE7F3', marginLeft: 12 }}>Escolas</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', fontSize: 72, fontWeight: 800, lineHeight: 1.05 }}>
-          <span>Cada aluno com retorno imediato.</span>
-          <span style={{ color: '#C4B5FD' }}>Cada nota com garantia.</span>
+          <span>Reforço escolar em casa,</span>
+          <span style={{ color: '#C4B5FD' }}>com retorno na hora, para cada aluno.</span>
         </div>
         <div style={{ display: 'flex', fontSize: 28, color: '#C9BFE3' }}>
-          Aprendizagem com inteligência artificial para redes públicas e privadas
+          Reforço escolar com inteligência artificial para redes públicas e privadas
         </div>
       </div>
     ),

@@ -1,6 +1,6 @@
 # SpeakFlow Escolas — site institucional
 
-Site institucional do **SpeakFlow Escolas**, plataforma de aprendizagem com inteligência artificial para redes de ensino públicas e privadas, desenvolvida pela [Codevelop Solutions](https://codevelop.com.br) (Salvador/BA).
+Site institucional do **SpeakFlow Escolas**, plataforma de reforço escolar com inteligência artificial para redes de ensino públicas e privadas: o aluno pratica em casa no que ainda não domina, recebe retorno na hora, e a escola acompanha quem avançou e quem precisa de ajuda. Desenvolvida desenvolvida pela [Codevelop Solutions](https://codevelop.com.br) (Salvador/BA).
 
 **Produção:** https://speakflowescola.com.br
 

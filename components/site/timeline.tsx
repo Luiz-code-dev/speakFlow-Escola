@@ -121,7 +121,7 @@ function HorizontalTimeline() {
           </div>
           <ol className="flex gap-6">
             {TIMELINE.map((item) => (
-              <li key={item.year} className="relative">
+              <li key={item.year + item.title} className="relative">
                 <span
                   className={cn(
                     'absolute -top-[2.4rem] left-7 size-3 rounded-full ring-4 ring-night',
@@ -163,7 +163,7 @@ function VerticalTimeline() {
         </span>
         {TIMELINE.map((item) => (
           <motion.li
-            key={item.year}
+            key={item.year + item.title}
             className="relative"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}

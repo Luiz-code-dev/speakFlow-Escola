@@ -2,9 +2,9 @@ import { Contact } from '@/components/site/contact'
 import { Demo } from '@/components/site/demo'
 import { Faq } from '@/components/site/faq'
 import { SiteFooter } from '@/components/site/footer'
-import { Grades } from '@/components/site/grades'
 import { SiteHeader } from '@/components/site/header'
 import { Hero } from '@/components/site/hero'
+import { HomePractice } from '@/components/site/home-practice'
 import { HowItWorks } from '@/components/site/how-it-works'
 import { Implementation } from '@/components/site/implementation'
 import { Need } from '@/components/site/need'
@@ -40,7 +40,7 @@ const jsonLd = [
     operatingSystem: 'Web',
     inLanguage: 'pt-BR',
     description:
-      'Aprendizagem com inteligência artificial para redes de ensino públicas e privadas, em qualquer componente curricular.',
+      'Reforço escolar com inteligência artificial: o aluno pratica em casa no que ainda não domina, recebe retorno na hora, e a escola acompanha quem avançou e quem precisa de ajuda.',
     publisher: { '@type': 'Organization', name: 'Codevelop Solutions' },
   },
 ]
@@ -60,8 +60,8 @@ export default function Home() {
         <Stories />
         <HowItWorks />
         <Demo />
+        <HomePractice />
         <Roles />
-        <Grades />
         <Security />
         <Implementation />
         <Faq />

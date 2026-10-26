@@ -4,24 +4,18 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
   BarChart3,
-  BookOpen,
   BookOpenCheck,
   Building2,
   Check,
   ClipboardCheck,
   FileSpreadsheet,
   GraduationCap,
-  LayoutGrid,
   Link2,
   ListTodo,
-  Lock,
-  Mic,
   Network,
-  PenLine,
-  Presentation,
   QrCode,
+  Route,
   School,
-  ShieldCheck,
   Sparkles,
   Target,
   Users,
@@ -29,6 +23,7 @@ import {
 import { ROLES, type RoleId } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 import { SectionHeading } from './primitives'
+import { TrailMockup } from './trail-mockup'
 
 const ROLE_ICONS: Record<RoleId, typeof Building2> = {
   secretaria: Building2,
@@ -42,20 +37,13 @@ type GroupIcon = (typeof ROLES)[number]['groups'][number]['icon']
 
 const GROUP_ICONS: Record<GroupIcon, typeof Building2> = {
   network: Network,
-  grid: LayoutGrid,
   chart: BarChart3,
-  shield: ShieldCheck,
-  book: BookOpen,
-  users: Users,
   clipboard: ClipboardCheck,
   target: Target,
+  route: Route,
   sheet: FileSpreadsheet,
-  qr: QrCode,
-  school: School,
+  users: Users,
   sparkles: Sparkles,
-  pen: PenLine,
-  lock: Lock,
-  projector: Presentation,
   list: ListTodo,
 }
 
@@ -101,19 +89,73 @@ function useCycle(length: number, ms: number) {
   return i
 }
 
-function ReviewChip() {
+function RecoveryChip() {
   const states: [string, ChipTone][] = [
-    ['Em revisão', 'wait'],
-    ['Aprovado', 'ok'],
+    ['Em defasagem', 'alert'],
+    ['Recuperando', 'wait'],
   ]
   const [label, tone] = states[useCycle(states.length, 2600)]
   return <Chip tone={tone}>{label}</Chip>
 }
 
-function TeacherStatus() {
-  const states = ['Aguardando revisão', 'Revisada pelo professor', 'Publicada']
-  const label = states[useCycle(states.length, 2200)]
-  return <span className="text-xs font-semibold text-brand-ink">{label}</span>
+type Cell = 'ok' | 'near' | 'no'
+
+const HEATMAP_SKILLS = ['Frações', 'Decimais', 'Gráficos', 'Área']
+const HEATMAP: Cell[][] = [
+  ['ok', 'ok', 'near', 'ok'],
+  ['no', 'near', 'ok', 'near'],
+  ['near', 'ok', 'ok', 'no'],
+  ['no', 'no', 'near', 'near'],
+  ['ok', 'near', 'ok', 'ok'],
+]
+const CELL_TONE: Record<Cell, string> = {
+  ok: 'bg-subject-ge',
+  near: 'bg-subject-es',
+  no: 'bg-subject-hi',
+}
+
+function Heatmap() {
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-sm font-semibold text-foreground">Turma 6º B · habilidades</p>
+      <div className="grid grid-cols-[3.5rem_repeat(4,minmax(0,1fr))] gap-1.5 text-[10px] font-semibold text-muted-foreground">
+        <span />
+        {HEATMAP_SKILLS.map((s) => (
+          <span key={s} className="truncate text-center">
+            {s}
+          </span>
+        ))}
+        {HEATMAP.map((row, r) => (
+          <div key={r} className="contents">
+            <span className="self-center">Aluno {r + 1}</span>
+            {row.map((cell, c) => (
+              <motion.span
+                key={c}
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 + (r * 4 + c) * 0.03 }}
+                className={cn('h-6 rounded-md', CELL_TONE[cell])}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      <ul className="flex flex-wrap gap-3 text-xs text-foreground">
+        {(
+          [
+            ['ok', 'Domina'],
+            ['near', 'Quase lá'],
+            ['no', 'Ainda não'],
+          ] as const
+        ).map(([tone, label]) => (
+          <li key={tone} className="flex items-center gap-1.5">
+            <span className={cn('size-3 rounded-sm', CELL_TONE[tone])} />
+            {label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 function Mockup({ role }: { role: RoleId }) {
@@ -121,9 +163,9 @@ function Mockup({ role }: { role: RoleId }) {
     case 'secretaria':
       return (
         <div className="flex flex-col gap-4">
-          <p className="text-sm font-semibold text-foreground">Indicadores da rede</p>
+          <p className="text-sm font-semibold text-foreground">Participação semanal da rede</p>
           <div className="flex h-28 items-end gap-2 rounded-xl bg-muted p-3">
-            {[45, 60, 52, 70, 64, 78, 72, 85].map((h, i) => (
+            {[40, 52, 58, 64, 70, 74, 80, 86].map((h, i) => (
               <motion.span
                 key={i}
                 initial={{ height: 0 }}
@@ -135,14 +177,14 @@ function Mockup({ role }: { role: RoleId }) {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-2 rounded-xl border border-border p-3">
-              <p className="text-xs font-semibold text-muted-foreground">Matriz curricular</p>
-              <Bar w="80%" />
-              <Bar w="60%" tone="muted" />
+              <p className="text-xs font-semibold text-muted-foreground">Em defasagem</p>
+              <Bar w="70%" tone="pink" />
+              <Bar w="45%" tone="pink" />
             </div>
             <div className="flex flex-col gap-2 rounded-xl border border-border p-3">
-              <p className="text-xs font-semibold text-muted-foreground">Relatório do bimestre</p>
-              <Bar w="70%" tone="pink" />
-              <Bar w="50%" tone="muted" />
+              <p className="text-xs font-semibold text-muted-foreground">Recuperadas</p>
+              <Bar w="55%" />
+              <Bar w="80%" />
             </div>
           </div>
         </div>
@@ -150,22 +192,22 @@ function Mockup({ role }: { role: RoleId }) {
     case 'coordenacao':
       return (
         <div className="flex flex-col gap-2.5">
-          <p className="text-sm font-semibold text-foreground">Planos de ensino</p>
+          <p className="text-sm font-semibold text-foreground">Habilidades prioritárias</p>
           <div className="flex items-center justify-between gap-3 rounded-xl border border-border p-3">
-            <span className="text-sm font-medium text-foreground">Inglês · 7º ano</span>
-            <Chip tone="ok">Aprovado</Chip>
+            <span className="text-sm font-medium text-foreground">Frações · 6º ano</span>
+            <RecoveryChip />
           </div>
           <div className="flex items-center justify-between gap-3 rounded-xl border border-border p-3">
-            <span className="text-sm font-medium text-foreground">Matemática · 6º ano</span>
-            <ReviewChip />
+            <span className="text-sm font-medium text-foreground">Leitura · 9º ano</span>
+            <Chip tone="wait">Recuperando</Chip>
           </div>
           <div className="flex items-center justify-between gap-3 rounded-xl border border-border p-3">
-            <span className="text-sm font-medium text-foreground">Português · 9º ano</span>
-            <Chip tone="alert">Retificação</Chip>
+            <span className="text-sm font-medium text-foreground">Trilha da Escola B</span>
+            <Chip tone="ok">Aprovada</Chip>
           </div>
           <div className="flex items-center justify-between gap-3 rounded-xl border border-border p-3">
-            <span className="text-sm font-medium text-foreground">Ciências · 8º ano</span>
-            <Chip tone="ok">Aprovado</Chip>
+            <span className="text-sm font-medium text-foreground">Escola C · 7º ano</span>
+            <Chip tone="alert">Precisa de apoio</Chip>
           </div>
         </div>
       )
@@ -179,91 +221,27 @@ function Mockup({ role }: { role: RoleId }) {
               Importar planilha
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-2">
-            {['6º A', '6º B', '7º A', '7º B', '8º A', '9º A'].map((t, i) => (
-              <motion.div
-                key={t}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.15 + i * 0.06 }}
-                className="flex flex-col gap-2 rounded-xl border border-border p-2.5"
-              >
-                <span className="text-sm font-semibold text-foreground">{t}</span>
-                <Bar w="70%" tone="muted" />
-              </motion.div>
-            ))}
-          </div>
           <div className="flex items-center gap-3 rounded-xl bg-muted p-3">
             <QrCode className="size-8 text-brand" aria-hidden="true" />
             <div className="flex flex-1 flex-col gap-1.5">
-              <span className="text-sm font-medium text-foreground">Cartões de acesso</span>
-              <Bar w="60%" />
+              <span className="text-sm font-medium text-foreground">Cartões para levar para casa</span>
+              <Bar w="75%" />
             </div>
+          </div>
+          <div className="flex flex-col gap-2 rounded-xl border border-border p-3">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-sm font-medium text-foreground">Sem praticar na semana</span>
+              <Chip tone="alert">Atenção</Chip>
+            </div>
+            <Bar w="65%" tone="muted" />
+            <Bar w="45%" tone="muted" />
           </div>
         </div>
       )
     case 'professor':
-      return (
-        <div className="flex flex-col gap-4">
-          <p className="text-sm font-semibold text-foreground">Produções da turma</p>
-          <div className="flex flex-col gap-3 rounded-xl border border-border p-4">
-            <span className="flex items-center gap-2 text-xs font-semibold text-pink-strong">
-              <Sparkles className="size-3.5" aria-hidden="true" />
-              Primeira correção pela IA
-            </span>
-            <Bar w="95%" tone="muted" />
-            <Bar w="85%" tone="muted" />
-            <Bar w="60%" tone="muted" />
-            <div className="flex items-center justify-between gap-2 rounded-lg bg-brand-soft p-3">
-              <span className="text-sm font-medium text-brand-ink">Nota sugerida</span>
-              <TeacherStatus />
-            </div>
-          </div>
-          <span className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-brand text-sm font-semibold text-primary-foreground">
-            <Check className="size-4" aria-hidden="true" />
-            Revisar e publicar
-          </span>
-        </div>
-      )
+      return <Heatmap />
     case 'aluno':
-      return (
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3 rounded-xl bg-muted p-3">
-            <QrCode className="size-8 text-brand" aria-hidden="true" />
-            <span className="text-sm font-medium text-foreground">Entrar com cartão QR</span>
-          </div>
-          <div className="flex items-center gap-3 rounded-xl border border-border p-3">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-pink text-primary-foreground">
-              <Mic className="size-4" aria-hidden="true" />
-            </span>
-            <div className="flex flex-1 items-center gap-1 overflow-hidden" aria-hidden="true">
-              {Array.from({ length: 16 }, (_, i) => (
-                <span
-                  key={i}
-                  className="h-6 w-1 shrink-0 origin-center animate-wave rounded-full bg-brand"
-                  style={{ animationDelay: `${i * 0.08}s` }}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col gap-2 rounded-xl border border-brand/20 bg-brand-soft/60 p-4">
-            <span className="text-sm font-semibold text-brand-ink">Retorno na hora</span>
-            <Bar w="90%" />
-            <Bar w="65%" tone="pink" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className="text-xs font-semibold text-muted-foreground">Minha evolução</span>
-            <div className="h-2 rounded-full bg-border">
-              <motion.span
-                initial={{ width: 0 }}
-                animate={{ width: '68%' }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className="block h-full rounded-full bg-gradient-to-r from-brand to-pink"
-              />
-            </div>
-          </div>
-        </div>
-      )
+      return <TrailMockup feedbackDelay={0.8} />
   }
 }
 
@@ -282,6 +260,7 @@ function useMeasuredHeight<T extends HTMLElement>() {
 
 function RolePanel({ role }: { role: (typeof ROLES)[number] }) {
   const Icon = ROLE_ICONS[role.id]
+  const groups = role.groups
   return (
     <div className="flex flex-col gap-6 p-5 sm:p-8">
       <div className="grid gap-6 md:grid-cols-[1fr_minmax(0,20rem)] md:items-start">
@@ -303,15 +282,19 @@ function RolePanel({ role }: { role: (typeof ROLES)[number] }) {
       </div>
 
       <ul className="grid gap-4 sm:grid-cols-2">
-        {role.groups.map((group, i) => {
+        {groups.map((group, i) => {
           const GIcon = GROUP_ICONS[group.icon]
+          const spanFull = groups.length % 2 === 1 && i === groups.length - 1
           return (
             <motion.li
               key={group.title}
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08 + i * 0.06, duration: 0.35 }}
-              className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5"
+              className={cn(
+                'flex flex-col gap-3 rounded-2xl border border-border bg-card p-5',
+                spanFull && 'sm:col-span-2',
+              )}
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand">
@@ -319,7 +302,7 @@ function RolePanel({ role }: { role: (typeof ROLES)[number] }) {
                 </span>
                 <h4 className="font-semibold text-foreground">{group.title}</h4>
               </div>
-              <ul className="flex flex-col gap-2">
+              <ul className={cn('grid gap-2', spanFull && group.items.length > 2 && 'sm:grid-cols-2')}>
                 {group.items.map((item) => (
                   <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-foreground">
                     <Check className="mt-1 size-3.5 shrink-0 text-brand" aria-hidden="true" />
@@ -332,21 +315,28 @@ function RolePanel({ role }: { role: (typeof ROLES)[number] }) {
         })}
       </ul>
 
-      <div className="flex flex-col gap-3 rounded-2xl bg-brand-soft/60 p-4 sm:flex-row sm:flex-wrap sm:items-center">
+      <div className="flex flex-col gap-3 rounded-2xl bg-brand-soft/60 p-4">
         <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand-ink">
           <Link2 className="size-4" aria-hidden="true" />
           Conectado com
         </span>
-        <ul className="flex flex-wrap gap-2">
-          {role.connections.map((c) => (
+        <ol className="flex flex-wrap gap-2">
+          {ROLES.map((r) => (
             <li
-              key={c}
-              className="rounded-full border border-brand/20 bg-card px-3 py-1 text-sm font-medium text-brand-ink"
+              key={r.id}
+              aria-current={r.id === role.id ? 'true' : undefined}
+              className={cn(
+                'rounded-xl border px-3 py-2 text-sm leading-snug',
+                r.id === role.id
+                  ? 'border-brand bg-brand text-primary-foreground'
+                  : 'border-brand/20 bg-card text-foreground',
+              )}
             >
-              {c}
+              <strong className="font-semibold">{r.label}</strong>
+              <span className={r.id === role.id ? '' : 'text-muted-foreground'}> · {r.connection}</span>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </div>
   )
@@ -382,7 +372,7 @@ export function Roles() {
           id="roles-title"
           eyebrow="Para cada papel"
           title="Uma plataforma, cinco perfis, cada um com a sua área"
-          description="Cada pessoa entra e vê só o que precisa para o seu trabalho. Tudo conectado: o que a Secretaria define chega à escola, à sala de aula e ao aluno."
+          description="Cada pessoa entra e vê só o que precisa para o seu trabalho. Tudo conectado: o que a Secretaria define chega à escola, ao professor e ao aluno em casa."
         />
         <div className="grid min-w-0 gap-6 lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-start">
           <div

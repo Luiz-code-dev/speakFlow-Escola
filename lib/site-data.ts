@@ -8,6 +8,7 @@ export const NAV_ITEMS = [
   { href: '#linha-do-tempo', label: 'Linha do tempo' },
   { href: '#como-funciona', label: 'Como funciona' },
   { href: '#demonstracao', label: 'Demonstração' },
+  { href: '#reforco-em-casa', label: 'Reforço em casa' },
   { href: '#papeis', label: 'Para cada papel' },
   { href: '#seguranca', label: 'Segurança' },
   { href: '#implantacao', label: 'Implantação' },
@@ -15,14 +16,12 @@ export const NAV_ITEMS = [
 ] as const
 
 export const SUBJECTS = [
-  { label: 'Inglês', color: 'var(--color-subject-en)' },
   { label: 'Língua Portuguesa', color: 'var(--color-subject-pt)' },
   { label: 'Matemática', color: 'var(--color-subject-ma)' },
+  { label: 'Inglês', color: 'var(--color-subject-en)' },
   { label: 'Ciências', color: 'var(--color-subject-ci)' },
   { label: 'História', color: 'var(--color-subject-hi)' },
   { label: 'Geografia', color: 'var(--color-subject-ge)' },
-  { label: 'Arte', color: 'var(--color-subject-ar)' },
-  { label: 'Educação Física', color: 'var(--color-subject-ef)' },
   { label: 'Espanhol', color: 'var(--color-subject-es)' },
 ] as const
 
@@ -50,6 +49,29 @@ export const NEED_STATS = [
     text: 'posição do Brasil entre 123 países em proficiência em inglês, nível baixo.',
     source: 'EF EPI 2025',
     color: 'var(--color-subject-en)',
+  },
+] as const
+
+export const NEED_REASONS = [
+  {
+    icon: 'bus',
+    title: 'Depende de sala, horário e transporte',
+    text: 'O reforço no contraturno exige professor, espaço e deslocamento do aluno, e por isso atende poucos.',
+  },
+  {
+    icon: 'feedback',
+    title: 'Pouco retorno individual',
+    text: 'Com 30 ou mais alunos por turma, o professor não consegue corrigir e comentar cada exercício de cada aluno.',
+  },
+  {
+    icon: 'home',
+    title: 'Tarefa de casa sem apoio',
+    text: 'Em casa, o aluno erra sem saber por quê, e nem toda família consegue ajudar em todos os conteúdos.',
+  },
+  {
+    icon: 'late',
+    title: 'Defasagem que só aparece no fim',
+    text: 'A Secretaria só vê o resultado nas avaliações externas, quando já não dá para corrigir o rumo do ano.',
   },
 ] as const
 
@@ -132,39 +154,46 @@ export const TIMELINE: TimelineItem[] = [
     text: 'A Lei 15.100/2025 restringe o celular na escola ao uso pedagógico, e o ECA Digital (Lei 15.211/2025) cria regras para proteger crianças no ambiente digital.',
   },
   {
+    year: '2025',
+    title: 'Pacto pela Recomposição das Aprendizagens',
+    text: 'O Decreto 12.391/2025 institui o Pacto Nacional pela Recomposição das Aprendizagens: as redes que aderem fazem o diagnóstico das defasagens e organizam práticas para superá-las.',
+  },
+  {
     year: '2026',
     title: 'O próximo passo: SpeakFlow Escolas',
-    text: 'Inteligência artificial a serviço do professor: cada aluno pratica, recebe retorno na hora e evolui; cada nota fica protegida; a rede acompanha a aprendizagem durante o ano.',
+    text: 'Reforço escolar com inteligência artificial: cada aluno pratica em casa no que precisa, recebe retorno na hora e evolui; a escola acompanha quem precisa de ajuda durante o ano.',
     highlight: true,
   },
 ]
 
 export const STORIES = [
   {
-    title: 'A aluna que ganhou voz em inglês',
-    text: 'No 7º ano, ela tinha vergonha de falar em inglês. Gravando respostas curtas no tablet e recebendo retorno sobre pronúncia e clareza, passou a praticar toda semana, sem medo de errar na frente da turma.',
+    title: 'A aluna que destravou as frações',
+    text: 'No 6º ano, ela errava as frações e não sabia por quê. Com a trilha de reforço, praticou em casa 15 minutos por dia, viu a explicação de cada erro e, em poucas semanas, saiu da lista de quem precisava de ajuda.',
+    image: '/images/story-fracoes.png',
+    alt: 'Ilustração de um celular sobre a mesa de casa mostrando um círculo dividido em quatro partes, com três destacadas.',
+  },
+  {
+    title: 'O menino que perdeu o medo de falar inglês',
+    text: 'Gravando respostas no celular, em casa, sem a turma olhando, ele treinou a pronúncia até se sentir seguro para falar na aula.',
     image: '/images/story-voz.png',
-    alt: 'Ilustração de um tablet com microfone e balões de fala saindo da tela.',
+    alt: 'Ilustração de um aparelho com microfone e balões de fala saindo da tela.',
   },
   {
-    title: 'O professor que recuperou suas noites',
-    text: 'A IA faz a primeira correção dos textos dos alunos e sugere a nota. Ele revisa, ajusta e publica. O tempo que gastava corrigindo vira tempo para planejar e acompanhar quem precisa de ajuda.',
-    image: '/images/story-professor.png',
-    alt: 'Ilustração de uma mesa de professor com notebook mostrando correções e uma nota sugerida.',
-  },
-  {
-    title: 'A coordenação que enxerga a rede',
-    text: 'Com os planos de ensino e as atividades no mesmo lugar, a coordenação vê o que foi ensinado em cada turma e onde os alunos estão com dificuldade, durante o bimestre.',
+    title: 'A professora que sabe por onde começar',
+    text: 'Antes da aula, ela abre o painel e vê quem praticou, quem avançou e quais habilidades ainda travam a turma. O tempo da aula vai para onde faz diferença.',
     image: '/images/story-coordenacao.png',
-    alt: 'Ilustração de um painel com gráficos e cartões de turmas conectados.',
+    alt: 'Ilustração de um painel com gráficos e cartões de habilidades conectados, com uma lupa em destaque.',
   },
   {
-    title: 'A Secretaria que presta contas com segurança',
-    text: 'Cada ata de notas é assinada digitalmente e pode ser verificada por QR code. A rede ganha transparência e proteção contra fraudes em resultados.',
-    image: '/images/story-secretaria.png',
-    alt: 'Ilustração de um documento com selo de assinatura digital e QR code sendo verificado por um celular.',
+    title: 'A Secretaria que recompõe a aprendizagem',
+    text: 'Com o diagnóstico e as trilhas em toda a rede, a Secretaria acompanha durante o ano quais habilidades da BNCC estão sendo recuperadas em cada escola.',
+    image: '/images/story-rede.png',
+    alt: 'Ilustração de um painel com um mapa de escolas conectadas, cada uma com um anel de progresso.',
   },
 ] as const
+
+export type Mastery = 'Ainda não' | 'Quase lá' | 'Domina'
 
 export type DemoCase = {
   id: 'en' | 'pt' | 'ma'
@@ -173,12 +202,13 @@ export type DemoCase = {
   grade: string
   mode: 'speech' | 'writing' | 'reasoning'
   color: string
+  skill: string
   prompt: string
   answer: string
   hits: string[]
   improve: string[]
   example: string
-  score: number
+  mastery: Mastery
 }
 
 export const DEMO_CASES: DemoCase[] = [
@@ -189,6 +219,7 @@ export const DEMO_CASES: DemoCase[] = [
     grade: '7º ano',
     mode: 'speech',
     color: 'var(--color-subject-en)',
+    skill: 'Falar sobre a rotina (presente simples)',
     prompt: 'Talk about your daily routine in English (about 30 seconds).',
     answer:
       'I wake up at six o\u2019clock. I go to school by bus. In the afternoon I play football with my friends.',
@@ -199,7 +230,7 @@ export const DEMO_CASES: DemoCase[] = [
     ],
     example:
       'I wake up at six o\u2019clock, then I go to school by bus. After school, I play football with my friends because it\u2019s fun.',
-    score: 8,
+    mastery: 'Quase lá',
   },
   {
     id: 'pt',
@@ -208,6 +239,7 @@ export const DEMO_CASES: DemoCase[] = [
     grade: '9º ano',
     mode: 'writing',
     color: 'var(--color-subject-pt)',
+    skill: 'Argumentação em texto de opinião',
     prompt: 'Escreva um parágrafo de opinião: o seu bairro precisa de mais áreas de lazer?',
     answer:
       'Sim, meu bairro precisa de mais áreas de lazer porque os jovens não tem onde praticar esportes e acabam ficando na rua sem fazer nada.',
@@ -218,7 +250,7 @@ export const DEMO_CASES: DemoCase[] = [
     ],
     example:
       'Sim, meu bairro precisa de mais áreas de lazer, porque os jovens não têm onde praticar esportes. Uma quadra na praça central, por exemplo, poderia reunir a comunidade.',
-    score: 7.5,
+    mastery: 'Quase lá',
   },
   {
     id: 'ma',
@@ -227,6 +259,7 @@ export const DEMO_CASES: DemoCase[] = [
     grade: '6º ano',
     mode: 'reasoning',
     color: 'var(--color-subject-ma)',
+    skill: 'Frações: parte de um todo',
     prompt:
       'Uma turma tem 32 alunos. 3/4 vieram de ônibus. Quantos alunos vieram de ônibus? Explique como pensou.',
     answer: 'Dividi 32 por 4 e deu 8. Depois multipliquei 8 por 3 e deu 24 alunos.',
@@ -234,237 +267,122 @@ export const DEMO_CASES: DemoCase[] = [
     improve: ['Explique por que dividiu por 4 (o denominador indica as partes)'],
     example:
       'Como 3/4 significa 3 de 4 partes iguais, dividi 32 por 4 (8 alunos em cada parte) e multipliquei por 3: 24 alunos vieram de ônibus.',
-    score: 9,
+    mastery: 'Domina',
   },
 ]
 
 export const ROLES = [
   {
     id: 'secretaria',
-    label: 'Secretaria de Educação',
-    summary: 'Visão de toda a rede durante o ano, não só quando chega a avaliação externa.',
+    label: 'Secretaria',
+    summary: 'A rede inteira em recomposição, acompanhada durante o ano.',
+    connection: 'Define as prioridades da rede',
     groups: [
       {
         icon: 'network',
-        title: 'Organização da rede',
+        title: 'Organização',
         items: [
-          'Cadastro das escolas da rede',
-          'Ano letivo e períodos (bimestres ou trimestres)',
-          'Regras de notas da rede (escala, arredondamento, média mínima e recuperação)',
-          'Convites para diretores e coordenadores',
-        ],
-      },
-      {
-        icon: 'grid',
-        title: 'Matriz curricular',
-        items: [
-          'Componentes da BNCC por etapa, ano e turno',
-          'Carga horária por componente',
-          'Inclusão de componentes da parte diversificada da rede',
+          'Escolas, turmas e alunos por planilha',
+          'Ano letivo e períodos',
+          'Prioridades do reforço por etapa e componente',
         ],
       },
       {
         icon: 'chart',
         title: 'Acompanhamento',
         items: [
-          'Indicadores por escola, turma e componente',
-          'Atividades realizadas e entregas no período',
-          'Diagnóstico de nível no início e ao longo do ano',
-          'Alerta de turmas com baixo desempenho',
-        ],
-      },
-      {
-        icon: 'shield',
-        title: 'Transparência e controle',
-        items: [
-          'Atas de notas assinadas e verificáveis por QR code',
-          'Auditoria de todas as ações',
-          'Retificações de notas registradas com justificativa',
-          'Relatórios para prestação de contas',
-        ],
-      },
-    ],
-    connections: ['Define as regras para todas as escolas', 'Recebe os indicadores das turmas'],
-  },
-  {
-    id: 'coordenacao',
-    label: 'Coordenação pedagógica',
-    summary: 'Planejamento alinhado à BNCC e acompanhamento do que acontece em cada turma.',
-    groups: [
-      {
-        icon: 'book',
-        title: 'Planos de ensino',
-        items: [
-          'Criação de planos por componente e ano',
-          'Unidades e assuntos vinculados às habilidades da BNCC',
-          'Revisão e aprovação dos planos dos professores',
-          'Reaproveitamento de planos entre turmas e anos',
-        ],
-      },
-      {
-        icon: 'users',
-        title: 'Acompanhamento dos professores',
-        items: [
-          'O que foi planejado e o que foi trabalhado',
-          'Atividades publicadas por turma',
-          'Andamento da correção e das notas',
+          'Participação semanal por escola',
+          'Habilidades da BNCC em defasagem e recuperadas',
+          'Evolução entre diagnósticos',
         ],
       },
       {
         icon: 'clipboard',
-        title: 'Avaliações e notas',
-        items: [
-          'Visão das avaliações de cada período',
-          'Decisão sobre pedidos de retificação de notas',
-          'Fechamento do período com conferência',
-        ],
-      },
-      {
-        icon: 'target',
-        title: 'Aprendizagem',
-        items: ['Desempenho por critério de avaliação', 'Turmas e assuntos que precisam de reforço'],
+        title: 'Prestação de contas',
+        items: ['Relatórios para a política de recomposição da rede', 'Exportação em PDF e planilha'],
       },
     ],
-    connections: ['Aprova os planos dos professores', 'Decide as retificações'],
+  },
+  {
+    id: 'coordenacao',
+    label: 'Coordenação pedagógica',
+    summary: 'Prioridades do reforço alinhadas à BNCC.',
+    connection: 'Aprova as trilhas',
+    groups: [
+      {
+        icon: 'target',
+        title: 'Diagnóstico',
+        items: ['Aplica e acompanha o diagnóstico por ano e componente'],
+      },
+      {
+        icon: 'route',
+        title: 'Trilhas',
+        items: ['Define habilidades prioritárias e aprova as trilhas das escolas'],
+      },
+      {
+        icon: 'chart',
+        title: 'Acompanhamento',
+        items: ['Escolas e turmas que precisam de mais apoio'],
+      },
+    ],
   },
   {
     id: 'direcao',
     label: 'Direção escolar',
-    summary: 'A escola organizada em poucos minutos, sem cadastrar ninguém um por um.',
+    summary: 'Reforço chegando a todos os alunos da escola.',
+    connection: 'Entrega os cartões às famílias',
     groups: [
       {
         icon: 'sheet',
-        title: 'Cadastro em lote',
+        title: 'Cadastro e acesso',
         items: [
-          'Importação de turmas, alunos e servidores por planilha (inclusive exportada do sistema da rede)',
-          'Conferência dos erros antes de confirmar',
-          'Convites enviados por e-mail automaticamente',
+          'Cadastro de turmas e alunos por planilha',
+          'Cartões de acesso para levar para casa',
+          'Comunicação com as famílias',
         ],
       },
       {
-        icon: 'grid',
-        title: 'Turmas e atribuições',
-        items: [
-          'Turmas por ano e turno',
-          'Quadro de atribuições (professor × componente × turma)',
-          'Troca de professor sem perder histórico',
-        ],
-      },
-      {
-        icon: 'qr',
-        title: 'Acesso dos alunos',
-        items: [
-          'Cartões de acesso com QR code para imprimir',
-          'Acesso por código da aula e matrícula, sem e-mail',
-          'Senha por figuras para os anos iniciais',
-          'Redefinição de acesso pela própria escola',
-        ],
-      },
-      {
-        icon: 'school',
-        title: 'Vida escolar',
-        items: [
-          'Enturmação, transferência e remanejamento',
-          'Passagem de ano sem perder histórico',
-          'Visão das notas e atividades de todas as turmas da escola',
-        ],
+        icon: 'users',
+        title: 'Quem precisa de apoio',
+        items: ['Alunos que não estão praticando', 'Horários de laboratório para quem não tem aparelho'],
       },
     ],
-    connections: ['Cadastra turmas e alunos', 'Distribui os cartões de acesso'],
   },
   {
     id: 'professor',
     label: 'Professor',
-    summary: 'A IA faz a primeira correção. O professor decide.',
+    summary: 'A IA corrige o reforço. O professor sabe por onde começar.',
+    connection: 'Indica as trilhas e acompanha',
     groups: [
       {
-        icon: 'book',
-        title: 'Planejamento',
-        items: ['Plano de ensino da turma com assuntos da BNCC', 'Atividades ligadas a cada assunto'],
-      },
-      {
         icon: 'sparkles',
-        title: 'Atividades com IA',
+        title: 'Reforço da turma',
         items: [
-          'Atividades de escrita, de fala e quiz',
-          'Sugestão de enunciado e critérios de avaliação pela IA (o professor edita)',
-          'Critérios com pesos definidos pelo professor',
-          'Prazo e número de tentativas',
+          'Indica trilhas para a turma ou para cada aluno',
+          'Vê quem praticou, quem avançou e quem travou',
+          'Revisa os retornos da IA quando quiser',
+          'Usa o painel para planejar a próxima aula',
         ],
-      },
-      {
-        icon: 'pen',
-        title: 'Correção',
-        items: [
-          'Primeira correção automática com nota sugerida e comentários',
-          'Ouvir a gravação do aluno',
-          'Ajustar a nota e comentar',
-          'Confirmar várias notas de uma vez, com revisão antes',
-        ],
-      },
-      {
-        icon: 'lock',
-        title: 'Notas com segurança',
-        items: [
-          'Planilha de notas por avaliação',
-          'Publicação protegida por senha',
-          'Nota publicada não pode ser apagada',
-          'Retificação só com justificativa e aprovação',
-        ],
-      },
-      {
-        icon: 'projector',
-        title: 'Sala de aula',
-        items: ['Modo sala para projetar no quadro', 'Abrir a aula para os alunos entrarem com o código'],
       },
     ],
-    connections: ['Segue o plano aprovado', 'Envia atividades aos alunos', 'Publica as notas'],
   },
   {
     id: 'aluno',
     label: 'Aluno',
-    summary: 'Pratica, recebe retorno na hora e acompanha a própria evolução.',
+    summary: 'Pratica no que precisa e vê a própria evolução.',
+    connection: 'Pratica em casa',
     groups: [
       {
-        icon: 'qr',
-        title: 'Acesso simples',
-        items: [
-          'Cartão QR, código da aula ou matrícula',
-          'Senha por figuras nos anos iniciais',
-          'Funciona em tablet, computador e celular',
-        ],
-      },
-      {
         icon: 'list',
-        title: 'Atividades',
+        title: 'Na trilha',
         items: [
-          'Lista do que fazer, por prazo',
-          'Escrita com rascunho salvo automaticamente',
-          'Fala com gravação, ouvir antes de enviar e gravar de novo',
-          'Quiz com uma pergunta por tela',
+          'Entra com cartão QR, matrícula e PIN',
+          'Trilha com o próximo passo',
+          'Retorno imediato e nova tentativa',
+          'Evolução por componente, sem comparar com colegas',
         ],
-      },
-      {
-        icon: 'sparkles',
-        title: 'Retorno da IA',
-        items: [
-          'O que acertou, como melhorar e exemplo de resposta',
-          'Transcrição da própria fala',
-          'Nova tentativa quando o professor permite',
-        ],
-      },
-      {
-        icon: 'chart',
-        title: 'Notas e evolução',
-        items: ['Notas publicadas pelo professor', 'Evolução por componente, sem comparação com colegas'],
-      },
-      {
-        icon: 'shield',
-        title: 'Ambiente protegido',
-        items: ['Sem rede social, chat, anúncios ou ranking entre colegas'],
       },
     ],
-    connections: ['Recebe as atividades do professor', 'Vê as notas publicadas'],
   },
 ] as const
 
@@ -472,23 +390,27 @@ export type RoleId = (typeof ROLES)[number]['id']
 
 export const FAQ = [
   {
-    q: 'É só para inglês?',
-    a: 'Não. O motor é o mesmo para qualquer componente: Português, Matemática, Ciências, História, Geografia, Arte, Espanhol e projetos.',
+    q: 'Só serve para Português e Matemática?',
+    a: 'Não. O motor é o mesmo para todos os componentes da BNCC: Português, Matemática, Inglês, Ciências, História, Geografia, Espanhol e outros.',
   },
   {
-    q: 'A IA vai substituir o professor?',
-    a: 'Não. A IA faz a primeira correção e sugere a nota. O professor revisa, aprova e decide.',
+    q: 'O aluno precisa de e-mail ou celular próprio?',
+    a: 'Não. Ele entra com o cartão QR ou com matrícula e PIN, no aparelho que a família tiver.',
+  },
+  {
+    q: 'E quem não tem internet em casa?',
+    a: 'A escola pode reservar horários no laboratório ou na biblioteca, e a rede pode fornecer tablets com chip de dados. O painel mostra quem não está praticando.',
+  },
+  {
+    q: 'A IA substitui o professor?',
+    a: 'Não. A IA corrige e explica cada atividade do reforço; o professor indica as trilhas, acompanha e decide como ajudar cada aluno.',
+  },
+  {
+    q: 'Isso substitui as notas da escola?',
+    a: 'Não. O SpeakFlow Escolas é para reforço e recomposição da aprendizagem. As notas oficiais continuam no sistema da rede.',
   },
   {
     q: 'E os dados dos alunos?',
     a: 'Ficam isolados por município, sem rede social nem anúncios. A IA recebe só a resposta, sem nome nem matrícula.',
-  },
-  {
-    q: 'A escola precisa de internet boa?',
-    a: 'O modo projeção funciona com um computador na sala, e a plataforma roda em tablets de vários tamanhos.',
-  },
-  {
-    q: 'Precisa integrar com os sistemas da rede ou da escola?',
-    a: 'Não para começar: escolas, turmas e alunos entram por planilha. Integrações com o sistema da rede podem ser feitas depois.',
   },
 ] as const

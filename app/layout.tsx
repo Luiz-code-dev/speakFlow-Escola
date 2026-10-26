@@ -12,9 +12,9 @@ const inter = Inter({
   display: 'swap',
 })
 
-const title = 'SpeakFlow Escolas — Aprendizagem com IA para redes de ensino'
+const title = 'SpeakFlow Escolas — Reforço escolar com inteligência artificial'
 const description =
-  'Aprendizagem com inteligência artificial para redes de ensino públicas e privadas, em qualquer componente curricular. Retorno imediato para cada aluno e notas com garantia.'
+  'Reforço escolar em casa com inteligência artificial: o aluno pratica no que ainda não domina, recebe retorno na hora, e a escola sabe quem avançou e quem precisa de ajuda. Em qualquer componente curricular.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

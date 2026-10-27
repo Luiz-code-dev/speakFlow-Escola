@@ -3,7 +3,7 @@
     "name": "SpeakFlow Escolas",
     "slug": "v0-project",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": false,
@@ -18,17 +18,25 @@
         "backgroundColor": "#4F46E5"
       },
       "package": "br.com.speakflow.escolas",
-      "versionCode": 2,
+      "versionCode": 3,
       "kotlinVersion": "1.9.25",
       "permissions": [
         "android.permission.INTERNET",
-        "android.permission.ACCESS_NETWORK_STATE"
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.CAMERA"
       ],
       "allowBackup": false
     },
     "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "br.com.speakflow.escolas"
+      "supportsTablet": true,
+      "bundleIdentifier": "br.com.speakflow.escolas",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSMicrophoneUsageDescription": "O SpeakFlow Escolas usa o microfone para você gravar suas respostas nas atividades de fala.",
+        "NSCameraUsageDescription": "O SpeakFlow Escolas usa a câmera para ler o QR code do seu cartão de acesso."
+      }
     },
     "extra": {
       "eas": {

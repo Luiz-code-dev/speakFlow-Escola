@@ -68,6 +68,8 @@ export default function App() {
         cacheEnabled={true}
         allowsBackForwardNavigationGestures={true}
         mediaPlaybackRequiresUserAction={false}
+        allowsInlineMediaPlayback={true}
+        mediaCapturePermissionGrantType="grant"
         mixedContentMode="compatibility"
         userAgent="SpeakFlowEscolasApp/1.0 Android"
         startInLoadingState={false}

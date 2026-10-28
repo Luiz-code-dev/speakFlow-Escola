@@ -2,6 +2,8 @@ export const SITE_URL = 'https://speakflowescola.com.br'
 export const CODEVELOP_URL = 'https://codevelop.com.br'
 export const CONTACT_EMAIL = 'luiz.melo@cdsolutions.com.br'
 export const FAMILY_LOGIN_URL = 'https://www.speakflow.ia.br/escola/familia/entrar'
+
+export const GOOGLE_PLAY_URL = process.env.NEXT_PUBLIC_GOOGLE_PLAY_URL?.trim() || ''
 export const FAMILY_ENABLED = process.env.NEXT_PUBLIC_FAMILY_ENABLED === 'true'
 
 export const NAV_ITEMS = [

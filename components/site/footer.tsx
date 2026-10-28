@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { CODEVELOP_URL, CONTACT_EMAIL } from '@/lib/site-data'
 import { Logo } from './logo'
+import { StoreBadges } from './store-badges'
 
 export function SiteFooter() {
   return (
@@ -22,6 +23,7 @@ export function SiteFooter() {
               </a>
               .
             </p>
+            <StoreBadges />
           </div>
           <address className="flex max-w-md flex-col gap-2 text-sm leading-relaxed text-muted-foreground not-italic">
             <p className="font-semibold text-foreground">CODEVELOP SOLUTIONS LTDA · CNPJ 51.412.510/0001-07</p>

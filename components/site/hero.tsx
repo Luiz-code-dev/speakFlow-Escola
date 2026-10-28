@@ -7,6 +7,7 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import { SUBJECTS } from '@/lib/site-data'
 import { ctaPrimary, ctaSecondary } from './primitives'
 import { TrailMockup } from './trail-mockup'
+import { StoreBadges } from './store-badges'
 
 const NeuralCanvas = dynamic(() => import('./neural-canvas'), { ssr: false })
 
@@ -103,6 +104,14 @@ export function Hero() {
             <a href="#como-funciona" className={ctaSecondary}>
               Ver como funciona
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <StoreBadges />
           </motion.div>
         </div>
 

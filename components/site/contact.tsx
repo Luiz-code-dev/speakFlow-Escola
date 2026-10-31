@@ -7,17 +7,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { CONTACT_EMAIL } from '@/lib/site-data'
-import { SectionHeading } from './primitives'
 
 const initial: ContactState = { status: 'idle' }
 
 const FIELDS = [
   { name: 'nome', label: 'Nome', type: 'text', autoComplete: 'name', required: true },
   { name: 'cargo', label: 'Cargo', type: 'text', autoComplete: 'organization-title', required: true },
-  { name: 'municipio', label: 'Município/UF', type: 'text', autoComplete: 'address-level2', required: true },
-  { name: 'email', label: 'E-mail institucional', type: 'email', autoComplete: 'email', required: true },
-  { name: 'telefone', label: 'Telefone (opcional)', type: 'tel', autoComplete: 'tel', required: false },
-  { name: 'alunos', label: 'Número aproximado de alunos da rede (opcional)', type: 'text', autoComplete: 'off', required: false },
+  { name: 'rede', label: 'Rede ou escola', type: 'text', autoComplete: 'organization', required: true },
+  { name: 'municipio', label: 'Município e UF', type: 'text', autoComplete: 'address-level2', required: true },
+  { name: 'email', label: 'E-mail', type: 'email', autoComplete: 'email', required: true },
+  { name: 'telefone', label: 'Telefone', type: 'tel', autoComplete: 'tel', required: false },
 ] as const
 
 const inputClass = 'h-12 rounded-xl bg-card px-4 text-base'
@@ -27,20 +26,37 @@ export function Contact() {
   const errors = state.errors ?? {}
 
   return (
-    <section id="contato" aria-labelledby="contact-title" className="py-20 lg:py-28">
+    <section
+      id="contato"
+      aria-labelledby="contact-title"
+      className="bg-gradient-to-br from-brand to-pink py-20 text-primary-foreground lg:py-28"
+    >
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="flex flex-col gap-8">
-          <SectionHeading
-            id="contact-title"
-            eyebrow="Contato"
-            title="Agende uma demonstração"
-            description="Conte um pouco sobre a sua rede. Nossa equipe entra em contato para apresentar a plataforma."
-          />
-          <div className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-6">
-            <p className="font-semibold text-foreground">Prefere escrever?</p>
+          <div className="flex flex-col gap-4">
+            <p className="text-sm font-semibold tracking-wide text-pink-soft uppercase">Contato</p>
+            <h2
+              id="contact-title"
+              className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+            >
+              Leve o reforço com IA para a sua rede.
+            </h2>
+            <p className="text-lg leading-relaxed text-pretty text-brand-soft">
+              Conte um pouco sobre a sua rede ou escola. Nossa equipe entra em contato para agendar a
+              demonstração.
+            </p>
+          </div>
+          <a
+            href="#formulario-contato"
+            className="inline-flex h-12 w-fit items-center justify-center rounded-xl bg-card px-6 font-semibold text-brand-ink shadow-lg transition-colors hover:bg-brand-soft"
+          >
+            Agendar demonstração
+          </a>
+          <div className="flex flex-col gap-2 rounded-3xl bg-primary-foreground/10 p-6">
+            <p className="font-semibold">Prefere escrever?</p>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="inline-flex items-center gap-2 font-semibold break-all text-brand underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 font-semibold break-all underline-offset-4 hover:underline"
             >
               <Mail className="size-4 shrink-0" aria-hidden="true" />
               {CONTACT_EMAIL}
@@ -48,7 +64,10 @@ export function Contact() {
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-border bg-card p-6 shadow-xl shadow-brand/10 sm:p-8">
+        <div
+          id="formulario-contato"
+          className="scroll-mt-24 rounded-[2rem] bg-card p-6 text-foreground shadow-2xl shadow-night/30 sm:p-8"
+        >
           {state.status === 'success' ? (
             <div role="status" className="flex min-h-80 flex-col items-center justify-center gap-4 text-center">
               <CheckCircle2 className="size-14 text-brand" aria-hidden="true" />

@@ -14,10 +14,10 @@ export type ContactState = {
 const schema = z.object({
   nome: z.string().trim().min(2, 'Informe seu nome.').max(120),
   cargo: z.string().trim().min(2, 'Informe seu cargo.').max(120),
-  municipio: z.string().trim().min(2, 'Informe o município/UF.').max(120),
+  rede: z.string().trim().min(2, 'Informe a rede ou escola.').max(160),
+  municipio: z.string().trim().min(2, 'Informe o município e a UF.').max(120),
   email: z.string().trim().email('Informe um e-mail válido.').max(160),
   telefone: z.string().trim().max(30).optional(),
-  alunos: z.string().trim().max(30).optional(),
   mensagem: z.string().trim().min(5, 'Escreva uma mensagem.').max(3000),
   consentimento: z.literal('on', { error: 'É preciso concordar para enviarmos o retorno.' }),
 })
@@ -62,7 +62,7 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
   }
 
   const raw = Object.fromEntries(
-    ['nome', 'cargo', 'municipio', 'email', 'telefone', 'alunos', 'mensagem', 'consentimento'].map(
+    ['nome', 'cargo', 'rede', 'municipio', 'email', 'telefone', 'mensagem', 'consentimento'].map(
       (k) => [k, formData.get(k) ?? undefined],
     ),
   )
@@ -89,10 +89,10 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
   const rows: [string, string][] = [
     ['Nome', d.nome],
     ['Cargo', d.cargo],
+    ['Rede ou escola', d.rede],
     ['Município/UF', d.municipio],
     ['E-mail', d.email],
     ['Telefone', d.telefone || '—'],
-    ['Alunos na rede (aprox.)', d.alunos || '—'],
   ]
   const text = [...rows.map(([k, v]) => `${k}: ${v}`), '', 'Mensagem:', d.mensagem].join('\n')
   const html = `<div style="font-family:Inter,Arial,sans-serif;color:#1F1A2E;max-width:560px">

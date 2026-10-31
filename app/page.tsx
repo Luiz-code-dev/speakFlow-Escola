@@ -1,18 +1,16 @@
+import { ClassActivities } from '@/components/site/class-activities'
 import { Contact } from '@/components/site/contact'
 import { Demo } from '@/components/site/demo'
-import { Family } from '@/components/site/family'
+import { Families } from '@/components/site/families'
 import { Faq } from '@/components/site/faq'
 import { SiteFooter } from '@/components/site/footer'
 import { SiteHeader } from '@/components/site/header'
 import { Hero } from '@/components/site/hero'
-import { HomePractice } from '@/components/site/home-practice'
-import { HowItWorks } from '@/components/site/how-it-works'
-import { StudentWeek } from '@/components/site/implementation'
-import { Need } from '@/components/site/need'
-import { Roles } from '@/components/site/roles'
+import { Problem } from '@/components/site/problem'
+import { ReinforcementPath } from '@/components/site/reinforcement-path'
+import { Schools } from '@/components/site/schools'
 import { Security } from '@/components/site/security'
-import { Stories } from '@/components/site/stories'
-import { Timeline } from '@/components/site/timeline'
+import { Students } from '@/components/site/students'
 import { CONTACT_EMAIL, SITE_URL } from '@/lib/site-data'
 
 const jsonLd = [
@@ -56,16 +54,14 @@ export default function Home() {
       <SiteHeader />
       <main id="conteudo">
         <Hero />
-        <Need />
-        <Timeline />
-        <Stories />
-        <HowItWorks />
+        <Problem />
+        <ReinforcementPath />
         <Demo />
-        <HomePractice />
-        <Family />
-        <Roles />
+        <Students />
+        <Families />
+        <Schools />
+        <ClassActivities />
         <Security />
-        <StudentWeek />
         <Faq />
         <Contact />
       </main>

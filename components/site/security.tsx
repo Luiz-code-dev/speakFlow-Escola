@@ -1,102 +1,51 @@
-import { Check, ShieldCheck, X } from 'lucide-react'
-import { Reveal, SectionHeading } from './primitives'
+import { DatabaseZap, EyeOff, ShieldCheck, Users, type LucideIcon } from 'lucide-react'
+import { LAWS, SAFETY_ITEMS } from '@/lib/site-data'
+import { GradientText, Reveal, SectionHeading, cardClass } from './primitives'
 
-const HAS = ['Atividades do seu professor', 'Retorno imediato', 'Sua evolução', 'Acesso sem e-mail']
-const HAS_NOT = [
-  'Rede social, chat ou contato com desconhecidos',
-  'Anúncios ou compras',
-  'Perfil público, foto ou localização',
-  'Ranking entre colegas ou notificações para prender a atenção',
-]
-const SEALS = [
-  'LGPD',
-  'ECA Digital (Lei 15.211/2025)',
-  'Lei 15.100/2025',
-  'Política Nacional de Educação Digital (Lei 14.533/2023)',
-  'Decreto 12.391/2025 (Recomposição das Aprendizagens)',
-]
+const ICONS: LucideIcon[] = [ShieldCheck, EyeOff, DatabaseZap, Users]
 
 export function Security() {
   return (
-    <section id="seguranca" aria-labelledby="security-title" className="relative overflow-hidden bg-night py-20 lg:py-28">
+    <section id="seguranca" aria-labelledby="security-title" className="bg-card py-20 lg:py-28">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-4 sm:px-6">
-        <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between">
-          <SectionHeading
-            tone="dark"
-            id="security-title"
-            eyebrow="Segurança e proteção de dados"
-            title="Um ambiente feito só para aprender."
-            description="Em casa, sem o professor ao lado, a proteção precisa estar no desenho da plataforma."
-          />
-          <div className="relative flex size-36 shrink-0 items-center justify-center self-center" aria-hidden="true">
-            <span className="absolute inset-0 animate-ping-slow rounded-full bg-brand/40" />
-            <span className="absolute inset-4 animate-ping-slow rounded-full bg-pink/30 [animation-delay:1s]" />
-            <span className="relative flex size-28 items-center justify-center rounded-full bg-brand shadow-[0_0_60px_rgba(109,40,217,0.8)]">
-              <ShieldCheck className="size-14 text-night-foreground" />
-            </span>
-          </div>
-        </div>
+        <SectionHeading
+          id="security-title"
+          eyebrow="Segurança e proteção"
+          title={
+            <>
+              Um ambiente feito <GradientText>só para aprender</GradientText>.
+            </>
+          }
+        />
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <Reveal className="flex flex-col gap-5 rounded-3xl border border-night-foreground/15 bg-night-foreground/[0.06] p-7">
-            <h3 className="text-xl font-bold text-night-foreground">O aluno tem</h3>
-            <ul className="flex flex-col gap-3">
-              {HAS.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-night-foreground">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand">
-                    <Check className="size-3.5" aria-hidden="true" />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.1} className="flex flex-col gap-5 rounded-3xl border border-night-foreground/15 bg-night-foreground/[0.06] p-7">
-            <h3 className="text-xl font-bold text-night-foreground">O aluno não tem</h3>
-            <ul className="flex flex-col gap-3">
-              {HAS_NOT.map((item) => (
-                <li key={item} className="flex items-start gap-3 leading-relaxed text-night-foreground">
-                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-pink">
-                    <X className="size-3.5" aria-hidden="true" />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-
-        <Reveal>
-          <p className="leading-relaxed text-night-foreground">
-            <strong className="font-bold">A família vê só os próprios filhos</strong>, com acesso
-            registrado e que a escola pode revogar.
-          </p>
-        </Reveal>
-
-        <Reveal>
-          <p className="max-w-3xl rounded-2xl border border-night-foreground/15 bg-night-foreground/[0.06] p-5 leading-relaxed text-night-foreground">
-            <strong className="font-bold">Lei 15.100/2025:</strong> O reforço é feito em casa, fora do
-            horário de aula. Na escola, o uso fica restrito ao fim pedagógico orientado pelo professor.
-          </p>
-        </Reveal>
-
-        <ul className="flex flex-wrap gap-3" aria-label="Legislação observada">
-          {SEALS.map((seal) => (
-            <li
-              key={seal}
-              className="rounded-full border border-night-foreground/25 px-4 py-2 text-sm font-semibold text-night-foreground"
-            >
-              {seal}
-            </li>
-          ))}
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {SAFETY_ITEMS.map((item, i) => {
+            const Icon = ICONS[i]
+            return (
+              <Reveal as="li" key={item.title} delay={i * 0.08} className={`${cardClass} flex flex-col gap-3 bg-background p-6`}>
+                <span className="flex size-11 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                  <Icon className="size-5" aria-hidden="true" />
+                </span>
+                <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
+                <p className="leading-relaxed text-muted-foreground">{item.text}</p>
+              </Reveal>
+            )
+          })}
         </ul>
 
-        <Reveal>
-          <p className="max-w-3xl text-2xl leading-snug font-bold text-balance text-night-foreground">
-            A inteligência artificial nunca recebe o nome ou a matrícula do aluno. A Secretaria é a
-            dona dos dados.
-          </p>
-        </Reveal>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p className="font-semibold text-foreground">Legislação observada:</p>
+          <ul className="flex flex-wrap gap-2">
+            {LAWS.map((law) => (
+              <li
+                key={law}
+                className="rounded-full border border-border bg-background px-3 py-1.5 text-sm font-semibold text-brand-ink"
+              >
+                {law}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )

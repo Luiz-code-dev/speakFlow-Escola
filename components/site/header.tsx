@@ -1,9 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Menu } from 'lucide-react'
+import { ChevronDown, LogIn, Menu } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { FAMILY_ENABLED, FAMILY_LOGIN_URL, NAV_ITEMS } from '@/lib/site-data'
+import { LOGIN_LINKS, NAV_ITEMS } from '@/lib/site-data'
 import { Logo } from './logo'
 
 export function SiteHeader() {
@@ -11,18 +17,18 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 2xl:max-w-none 2xl:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <a href="#inicio" aria-label="SpeakFlow Escolas — início" className="shrink-0 rounded-lg">
           <Logo />
         </a>
 
-        <nav aria-label="Seções da página" className="hidden 2xl:block">
-          <ul className="flex items-center gap-0.5">
-            {NAV_ITEMS.slice(1).map((item) => (
+        <nav aria-label="Seções da página" className="hidden xl:block">
+          <ul className="flex items-center gap-1">
+            {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="rounded-lg px-1.5 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-brand-soft hover:text-brand-ink"
+                  className="rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-brand-soft hover:text-brand-ink"
                 >
                   {item.label}
                 </a>
@@ -32,28 +38,40 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          {FAMILY_ENABLED && (
-            <a
-              href={FAMILY_LOGIN_URL}
-              className="hidden h-10 shrink-0 items-center rounded-xl px-3 text-sm font-semibold whitespace-nowrap text-brand-ink transition-colors hover:bg-brand-soft sm:inline-flex"
-            >
-              Sou responsável
-            </a>
-          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="hidden h-10 items-center gap-1.5 rounded-xl px-3 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand-soft aria-expanded:bg-brand-soft md:inline-flex">
+              Entrar
+              <ChevronDown className="size-4" aria-hidden="true" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" sideOffset={8} className="w-72 rounded-2xl p-2">
+              {LOGIN_LINKS.map((link) => (
+                <DropdownMenuItem
+                  key={link.label}
+                  render={<a href={link.href} />}
+                  className="flex flex-col items-start gap-0.5 rounded-xl px-3 py-2.5"
+                >
+                  <span className="font-semibold text-foreground">{link.label}</span>
+                  <span className="text-xs text-muted-foreground">{link.description}</span>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <a
             href="#contato"
-            className="hidden h-10 shrink-0 items-center rounded-xl whitespace-nowrap bg-brand px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-brand-hover sm:inline-flex"
+            className="hidden h-10 items-center rounded-xl bg-brand px-4 text-sm font-semibold whitespace-nowrap text-primary-foreground transition-colors hover:bg-brand-hover sm:inline-flex"
           >
             Agendar demonstração
           </a>
+
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="inline-flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground 2xl:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground xl:hidden"
               aria-label="Abrir menu"
             >
               <Menu className="size-5" aria-hidden="true" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-card p-6">
+            <SheetContent side="right" className="w-80 overflow-y-auto bg-card p-6">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <Logo />
               <nav aria-label="Seções da página (menu móvel)" className="mt-4">
@@ -78,14 +96,25 @@ export function SiteHeader() {
               >
                 Agendar demonstração
               </a>
-              {FAMILY_ENABLED && (
-                <a
-                  href={FAMILY_LOGIN_URL}
-                  className="mt-2 inline-flex h-12 items-center justify-center rounded-xl border border-brand/30 px-4 font-semibold text-brand-ink hover:bg-brand-soft"
-                >
-                  Sou responsável
-                </a>
-              )}
+              <div className="mt-6 flex flex-col gap-2 border-t border-border pt-5">
+                <p className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+                  <LogIn className="size-4" aria-hidden="true" />
+                  Entrar
+                </p>
+                <ul className="flex flex-col gap-1">
+                  {LOGIN_LINKS.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="flex flex-col rounded-lg px-3 py-2.5 hover:bg-brand-soft"
+                      >
+                        <span className="font-semibold text-foreground">{link.label}</span>
+                        <span className="text-sm text-muted-foreground">{link.description}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

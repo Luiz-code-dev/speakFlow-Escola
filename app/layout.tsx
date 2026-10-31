@@ -12,9 +12,9 @@ const inter = Inter({
   display: 'swap',
 })
 
-const title = 'SpeakFlow Escolas — Reforço escolar com inteligência artificial'
+const title = 'SpeakFlow Escolas — Reforço escolar com IA alinhado à BNCC'
 const description =
-  'Reforço escolar em casa com inteligência artificial: o aluno pratica no que ainda não domina, recebe retorno na hora, e a escola sabe quem avançou e quem precisa de ajuda. Em qualquer componente curricular.'
+  'O diagnóstico descobre a habilidade que falta, mesmo que seja de anos anteriores. A IA monta a trilha, corrige na hora e explica o erro. O aluno pratica em casa, e a escola e a família acompanham cada passo.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

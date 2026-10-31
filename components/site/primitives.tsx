@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import type { Level } from '@/lib/site-data'
 
 export function Reveal({
   children,
@@ -25,6 +26,12 @@ export function Reveal({
     >
       {children}
     </Comp>
+  )
+}
+
+export function GradientText({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="bg-gradient-to-r from-brand to-pink bg-clip-text text-transparent">{children}</span>
   )
 }
 
@@ -75,6 +82,84 @@ export function SectionHeading({
     </Reveal>
   )
 }
+
+const LEVEL_STYLES: Record<Level, string> = {
+  'Ainda não': 'bg-level-no text-level-no-ink',
+  'Quase lá': 'bg-level-almost text-level-almost-ink',
+  Domina: 'bg-level-yes text-level-yes-ink',
+}
+
+export function levelClass(level: Level) {
+  return LEVEL_STYLES[level]
+}
+
+export function LevelPill({ level, className }: { level: Level; className?: string }) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold whitespace-nowrap',
+        LEVEL_STYLES[level],
+        className,
+      )}
+    >
+      {level}
+    </span>
+  )
+}
+
+export function IllustrativeTag({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        'inline-flex w-fit items-center rounded-full border border-border bg-card px-2.5 py-1 text-xs font-semibold text-muted-foreground',
+        className,
+      )}
+    >
+      Cenário ilustrativo
+    </span>
+  )
+}
+
+export function PhoneFrame({
+  label,
+  children,
+  className,
+}: {
+  label: string
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div role="img" aria-label={label} className={cn('mx-auto w-full max-w-[20rem]', className)}>
+      <div className="rounded-[2.75rem] bg-night p-2.5 shadow-2xl shadow-brand/30">
+        <div className="relative overflow-hidden rounded-[2.25rem] bg-background">
+          <div aria-hidden="true" className="mx-auto mt-2.5 h-5 w-24 rounded-full bg-night" />
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function TabletFrame({
+  label,
+  children,
+  className,
+}: {
+  label: string
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div role="img" aria-label={label} className={cn('mx-auto w-full max-w-xl', className)}>
+      <div className="rounded-[2rem] bg-night p-3 shadow-2xl shadow-brand/25">
+        <div className="overflow-hidden rounded-[1.4rem] bg-background">{children}</div>
+      </div>
+    </div>
+  )
+}
+
+export const cardClass = 'rounded-3xl border border-border bg-card shadow-lg shadow-brand/5'
 
 export const ctaPrimary =
   'inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand px-6 text-base font-semibold text-primary-foreground shadow-lg shadow-brand/25 transition-colors hover:bg-brand-hover focus-visible:outline-offset-4'

@@ -11,7 +11,7 @@ export function SiteFooter() {
           <div className="flex max-w-sm flex-col gap-4">
             <Logo />
             <p className="leading-relaxed text-muted-foreground">
-              Um produto SpeakFlow, desenvolvido pela{' '}
+              Uma solução{' '}
               <a
                 href={CODEVELOP_URL}
                 target="_blank"

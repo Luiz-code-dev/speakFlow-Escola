@@ -18,7 +18,7 @@ export const SCHOOL_LOGIN_URL =
   process.env.NEXT_PUBLIC_SCHOOL_LOGIN_URL?.trim() || 'https://www.speakflow.ia.br/escola/entrar'
 
 export const LOGIN_LINKS = [
-  { label: 'Aluno', description: 'Cartão de figuras, PIN ou código da aula', href: STUDENT_LOGIN_URL },
+  { label: 'Aluno', description: 'Cartão QR com figuras ou PIN', href: STUDENT_LOGIN_URL },
   ...(FAMILY_ENABLED
     ? [{ label: 'Família', description: 'Acompanhe seus filhos', href: FAMILY_LOGIN_URL }]
     : []),
@@ -193,7 +193,7 @@ export const STUDENT_CARDS = [
   {
     icon: 'key',
     title: 'Entrar é fácil',
-    text: 'Do 1º ao 5º ano, você entra tocando nas figuras do seu cartão. Do 6º em diante, com um PIN de 4 números. Ou com o código da aula. Sem e-mail.',
+    text: 'Em casa, aponte a câmera para o QR do seu cartão. Do 1º ao 5º ano, você confirma tocando nas suas figuras; do 6º em diante, com o seu PIN de 4 números. Depois, o aparelho lembra de você. Sem e-mail.',
   },
   { icon: 'mic', title: 'Fala, escreve ou resolve', text: 'Responda do jeito que preferir, até por áudio.' },
   { icon: 'retry', title: 'Errar faz parte', text: 'A IA explica e você tenta de novo, sem ninguém olhando.' },
@@ -212,14 +212,15 @@ export const FAMILY_ITEMS = [
   'Uma dica curta de como ajudar em casa.',
   'Aviso depois de 7 dias sem praticar.',
   'Todos os filhos num só acesso.',
+  'Prepare o aparelho de casa para o seu filho e crie um PIN novo quando ele esquecer, sem precisar ir à escola.',
   'Contato da escola.',
-]
-
-export const FAMILY_ONBOARDING = [
-  'A escola cadastra a família.',
-  'A família recebe o convite por e-mail ou WhatsApp, ou usa o código do cartão do aluno.',
-  'Cria a senha e já acompanha.',
-]
+  ]
+  
+  export const FAMILY_ONBOARDING = [
+  'A escola cadastra o aluno e a família.',
+  'A família recebe o convite por e-mail ou WhatsApp, já com o acesso do filho: cartão QR e PIN, ou as figuras para os pequenos. Sem e-mail? A escola entrega um kit impresso em envelope.',
+  'Cria a senha, prepara o aparelho de casa e o filho já começa a praticar.',
+  ]
 
 export const ROLE_TABS = [
   {
@@ -250,7 +251,7 @@ export const ROLE_TABS = [
     title: 'A escola funcionando, sem planilha paralela.',
     items: [
       'Cadastro por planilha.',
-      'Cartões de acesso.',
+      'Acesso das famílias: convite com o acesso do aluno, ou kit impresso individual.',
       'Quem não está praticando.',
       'Participação das famílias.',
     ],
@@ -280,7 +281,7 @@ export const CLASS_MAP: { name: string; levels: Level[] }[] = [
 ]
 
 export const CLASS_ACTIVITY_STEPS = [
-  { title: 'Foto do quadro', text: 'O professor tira uma foto do quadro ou escolhe as habilidades da aula.' },
+  { title: 'Foto do quadro', text: 'O professor tira uma foto do quadro ou escolhe as habilidades da aula. Na sala, os alunos entram com o código da aula.' },
   { title: 'Perguntas sugeridas', text: 'A IA sugere perguntas, e o professor revisa e publica.' },
   {
     title: 'Quanto a turma absorveu',
@@ -309,7 +310,11 @@ export const FAQ = [
   },
   {
     q: 'O aluno precisa de celular ou e-mail próprio?',
-    a: 'Não. Usa o aparelho da família, com o cartão de acesso.',
+    a: 'Não. Ele usa o aparelho da família, que o responsável prepara uma vez. A criança entra com o cartão QR e as figuras ou o PIN.',
+  },
+  {
+  q: 'Quem entrega o acesso do aluno?',
+  a: 'A escola entrega à família, junto com o acesso dela, por convite digital ou kit impresso. Se o aluno esquecer o PIN, o próprio responsável cria um novo no app. O professor não precisa cuidar de senhas.',
   },
   {
     q: 'E quem não tem internet em casa?',

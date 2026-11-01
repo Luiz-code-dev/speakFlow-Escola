@@ -5,6 +5,12 @@ export const FAMILY_LOGIN_URL = 'https://www.speakflow.ia.br/escola/familia/entr
 
 export const GOOGLE_PLAY_URL = process.env.NEXT_PUBLIC_GOOGLE_PLAY_URL?.trim() || ''
 export const FAMILY_ENABLED = process.env.NEXT_PUBLIC_FAMILY_ENABLED === 'true'
+export const INTEGRITY_ENABLED = process.env.NEXT_PUBLIC_INTEGRITY_ENABLED === 'true'
+
+export const INTEGRITY_ITEM = {
+  title: 'Aprendizado de verdade:',
+  text: 'o aluno não pula questões nem passa chutando. Respostas rápidas demais não contam, cada nova tentativa traz outra versão da questão, e uma habilidade só vira "Domina" com acertos em questões diferentes e uma explicação com as próprias palavras.',
+}
 
 export const STUDENT_LOGIN_URL =
   process.env.NEXT_PUBLIC_STUDENT_LOGIN_URL?.trim() || 'https://www.speakflow.ia.br/escola/aluno/entrar'

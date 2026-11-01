@@ -1,10 +1,10 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Check, Landmark, Route } from 'lucide-react'
+import { Check, Landmark, Route, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { CLASS_MAP, CLASS_SKILLS, ROLE_TABS } from '@/lib/site-data'
+import { CLASS_MAP, CLASS_SKILLS, INTEGRITY_ENABLED, INTEGRITY_ITEM, ROLE_TABS } from '@/lib/site-data'
 import { GradientText, IllustrativeTag, Reveal, SectionHeading, TabletFrame, levelClass } from './primitives'
 
 export function Schools() {
@@ -90,6 +90,16 @@ export function Schools() {
                     {item}
                   </li>
                 ))}
+                {INTEGRITY_ENABLED && active.id === 'professor' ? (
+                  <li className="flex gap-3 text-lg leading-relaxed text-foreground">
+                    <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand">
+                      <ShieldCheck className="size-4" aria-hidden="true" />
+                    </span>
+                    <span>
+                      <strong className="font-bold">{INTEGRITY_ITEM.title}</strong> {INTEGRITY_ITEM.text}
+                    </span>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>
@@ -114,11 +124,26 @@ export function Schools() {
   )
 }
 
-const SHORT = { 'Ainda não': 'Não', 'Quase lá': 'Quase', Domina: 'Domina' } as const
 const HIGHLIGHT = 'Davi E.'
 
 function ClassMapTablet() {
   const reduce = useReducedMotion()
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [canScrollRight, setCanScrollRight] = useState(false)
+
+  function measure() {
+    const el = scrollRef.current
+    if (!el) return
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+  }
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <TabletFrame label="Tablet com o Mapa da turma do 6º ano B: seis alunos com nomes fictícios e quatro habilidades de frações e porcentagem, com cada célula colorida pelo nível. O aluno Davi está destacado e sua ficha mostra o erro comum de somar numerador com numerador e a sugestão de trilha em frações equivalentes do 4º ano.">
@@ -138,42 +163,56 @@ function ClassMapTablet() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-xl bg-card">
-          <div className="grid grid-cols-[5.5rem_repeat(4,minmax(0,1fr))] gap-1 p-2 text-xs">
-            <span />
-            {CLASS_SKILLS.map((s) => (
-              <span key={s} className="px-1 pb-1 text-center leading-tight font-semibold text-muted-foreground">
-                {s}
-              </span>
-            ))}
-            {CLASS_MAP.map((row) => {
-              const hl = row.name === HIGHLIGHT
-              return (
-                <div key={row.name} className="contents">
-                  <span
-                    className={cn(
-                      'flex items-center rounded-md px-1.5 font-semibold',
-                      hl ? 'bg-brand text-primary-foreground' : 'text-foreground',
-                    )}
-                  >
-                    {row.name}
-                  </span>
-                  {row.levels.map((l, i) => (
-                    <span
-                      key={i}
-                      className={cn(
-                        'flex h-8 items-center justify-center rounded-md font-bold',
-                        levelClass(l),
-                        hl && 'ring-2 ring-brand',
-                      )}
-                    >
-                      {SHORT[l]}
+        <div className="relative overflow-hidden rounded-xl bg-card">
+          <div ref={scrollRef} onScroll={measure} className="overflow-x-auto">
+            <div className="grid min-w-max grid-cols-[5.5rem_repeat(4,minmax(88px,1fr))] gap-1 p-2 text-xs sm:min-w-0">
+              <span className="sticky left-0 z-10 bg-card" />
+              {CLASS_SKILLS.map((s) => (
+                <span
+                  key={s}
+                  className="line-clamp-2 self-end px-1 pb-1 text-center leading-tight font-semibold text-muted-foreground"
+                >
+                  {s}
+                </span>
+              ))}
+              {CLASS_MAP.map((row) => {
+                const hl = row.name === HIGHLIGHT
+                return (
+                  <div key={row.name} className="contents">
+                    <span className="sticky left-0 z-10 flex bg-card">
+                      <span
+                        className={cn(
+                          'flex w-full items-center rounded-md px-1.5 font-semibold',
+                          hl ? 'bg-brand text-primary-foreground' : 'text-foreground',
+                        )}
+                      >
+                        {row.name}
+                      </span>
                     </span>
-                  ))}
-                </div>
-              )
-            })}
+                    {row.levels.map((l, i) => (
+                      <span
+                        key={i}
+                        className={cn(
+                          'flex min-h-8 items-center justify-center rounded-md px-1 py-1 text-center leading-tight font-bold',
+                          levelClass(l),
+                          hl && 'ring-2 ring-brand ring-inset',
+                        )}
+                      >
+                        {l}
+                      </span>
+                    ))}
+                  </div>
+                )
+              })}
+            </div>
           </div>
+          <div
+            aria-hidden="true"
+            className={cn(
+              'pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-foreground/15 to-transparent transition-opacity',
+              canScrollRight ? 'opacity-100' : 'opacity-0',
+            )}
+          />
         </div>
 
         <motion.div

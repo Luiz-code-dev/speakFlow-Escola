@@ -40,8 +40,8 @@ export function Schools() {
           }
         />
 
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div className="flex flex-col gap-6">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
+          <div className="flex min-w-0 flex-col gap-6">
             <div
               role="tablist"
               aria-label="Papéis na rede"
@@ -104,7 +104,7 @@ export function Schools() {
             </div>
           </div>
 
-          <Reveal className="flex flex-col items-center gap-3">
+          <Reveal className="flex min-w-0 flex-col items-center gap-3">
             <ClassMapTablet />
             <IllustrativeTag />
           </Reveal>
